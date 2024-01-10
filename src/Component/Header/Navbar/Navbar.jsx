@@ -6,7 +6,7 @@ import { FaCaretDown, FaSistrix, FaUserCircle } from "react-icons/fa";
 import { useUserStore } from "../../zustand/useUserStore";
 import { Login } from "../../Login.jsx/Login";
 import { MyProfile } from "../../Profile/MyProfile";
-
+import { useApiToken } from "../../zustand/useApiToken";
 export const Navbar = ({
   setData,
   addItem,
@@ -21,6 +21,7 @@ export const Navbar = ({
   setUser_id,
 }) => {
   const navigate = useNavigate();
+  
   const [showSearch, setShowSearch] = useState(true);
   let menuRef = useRef(null);
   let deskRef = useRef(null);
@@ -35,16 +36,19 @@ export const Navbar = ({
     userInfo: { user_id, name, profile, mobile },
     setUserInfo,
   } = useUserStore();
-
+  const { apiToken, accessTokenApi } = useApiToken();
   const [profileView, setProfileView] = useState(false);
 
   const handleClickOutside = (event) => {
     if (
       menuRef.current &&
       !menuRef.current.contains(event.target) &&
-      !deskRef.current.contains(event.target)
-    ) {
+      !deskRef.current.contains(event.target) ||( mobRef.current && !mobRef.current.contains(event.target) &&  !deskRef.current.contains(event.target))
+    ) 
+    {
       setIsOpen(false);
+      setMobileOpen(false);
+
     }
   };
 
@@ -92,15 +96,19 @@ export const Navbar = ({
 
   const handleLogout = () => {
     setUserInfo({ user_id: "", name: "Login" });
+    
     setIsOpen(false);
     setMobileOpen(false);
     navigate("/");
+   
   };
 
   const handleProfile = () => {
     setIsOpen(false);
     setProfileView((prev) => !prev);
   };
+  console.log("isOpen>>>>>>>>>>>>>>",isOpen);
+  console.log("mobileOpen>>>>>>>>>>>>>>",mobileOpen);
   return (
     <div className="">
       <nav className=" px-2  sm:px-0 fixed w-full z-20 top-0 left-0 border-b border-light_gray shadow-sm bg-white">
@@ -118,7 +126,7 @@ export const Navbar = ({
             <div className="relative hidden xs:block md:hidden sm:hidden">
               {!(user_id == false) ? (
                 <div
-                  className="flex justify-center items-center hover:border border border-[white] hover:border-light_gray hover:bg-[#ff9f9]  mr-3 text-center cursor-pointer hover:shadow-sm rounded-br-[50px]  rounded-tr-[50px]  rounded-l-[100px]"
+                  className=" flex justify-center items-center hover:border border border-[white] hover:border-light_gray hover:bg-[#ff9f9]  mr-3 text-center cursor-pointer hover:shadow-sm rounded-br-[50px]  rounded-tr-[50px]  rounded-l-[100px]"
                   onClick={() => {
                     setMobileOpen(!mobileOpen);
                   }}
@@ -155,7 +163,7 @@ export const Navbar = ({
 
               {mobileOpen && (
                 <div
-                  className="top-0 p-5 pt-0 right-0 xs:mr-[-22px]  w-56 shadow-lg rounded-lg bg-[#f5f4f4]  xs:mt-[44px] z-10 absolute px-4"
+                  className=" top-0 p-5 pt-0 right-0 xs:mr-[-22px]  w-56 shadow-lg rounded-lg bg-[#f5f4f4]  xs:mt-[44px] z-10 absolute px-4"
                   ref={mobRef}
                 >
                   <ul className="">
@@ -169,14 +177,14 @@ export const Navbar = ({
 
                     <li className="cursor-pointer">
                       <NavLink to={"/myorder"}>
-                        <p className="sm:text-lg md:text-sm mt-4">My Orders</p>
+                        <p onClick={() => setMobileOpen(false)} className="sm:text-lg md:text-sm mt-4">My Orders</p>
                       </NavLink>
                     </li>
                     <div className="border-b border-light_gray my-2 "></div>
 
                     <li className="cursor-pointer">
                       <NavLink to={"/address"}>
-                        <p className=" sm:text-lg md:text-sm mt-4">
+                        <p onClick={() => setMobileOpen(false)} className=" sm:text-lg md:text-sm mt-4  ">
                           My Address
                         </p>
                       </NavLink>
@@ -184,7 +192,7 @@ export const Navbar = ({
                     <div className="border-b border-light_gray my-2 "></div>
                     <li className="  cursor-pointer">
                       <NavLink to={"/favpage"}>
-                        <p className=" sm:text-lg md:text-sm mt-4">
+                        <p onClick={() => setMobileOpen(false)} className=" sm:text-lg md:text-sm mt-4">
                           Favourties
                         </p>
                       </NavLink>
@@ -192,7 +200,7 @@ export const Navbar = ({
                     <div className="border-b border-light_gray my-2 "></div>
                     <li className="  cursor-pointer">
                       <p
-                        onClick={handleProfile}
+                        onClick={()=>{handleProfile(); setMobileOpen(false)} }
                         className="sm:text-lg md:text-sm mt-4"
                       >
                         My Profile
@@ -202,7 +210,7 @@ export const Navbar = ({
                     <li className=" cursor-pointer">
                       <div className="flex justify-between mt-4  ">
                         <NavLink to={"/wallet"}>
-                          <p className="sm:text-lg md:text-sm">My Wallet</p>
+                          <p onClick={() => setMobileOpen(false)} className="sm:text-lg md:text-sm">My Wallet</p>
                         </NavLink>
                         <p className="sm:text-lg md:text-sm">₹500</p>
                       </div>
@@ -210,14 +218,14 @@ export const Navbar = ({
                     <div className="border-b border-light_gray my-2 "></div>
                     <li className="cursor-pointer">
                       <NavLink to={"/faq"}>
-                        <p className=" sm:text-lg md:text-sm mt-4">FAQ</p>
+                        <p onClick={() => setMobileOpen(false)} className=" sm:text-lg md:text-sm mt-4 ">FAQ</p>
                       </NavLink>
                     </li>
                     <div className="border-b border-light_gray my-2 "></div>
 
                     <li className=" cursor-pointer">
-                      <p
-                        onClick={handleLogout}
+                      <p 
+                        onClick={()=>{handleLogout(); setMobileOpen(false)} }
                         className="sm:text-lg md:text-sm mt-4 cursor-pointer"
                       >
                         Log Out
@@ -363,7 +371,7 @@ export const Navbar = ({
                         <NavLink to={"/faq"}>
                           <p
                             onClick={() => setIsOpen(false)}
-                            className=" sm:text-lg md:text-sm mt-4"
+                            className=" sm:text-lg md:text-sm mt-4 "
                           >
                             FAQ
                           </p>

@@ -268,7 +268,7 @@ export const SubCategory = ({ setAddItem, addItem, setNavbarOpen }) => {
                     alt={item.name}
                   />
                   <div className=" pt-2 md:py-2 md:mx-4 xs:mx-2 sm:mx-4 ">
-                    <p className="md:text-sm xs:text-sm sm:text-[20px]  font-medium   truncate ">
+                    <p className="md:text-sm xs:text-sm sm:text-[20px]  font-medium   truncate  ">
                       {item.name}
                     </p>
                   </div>

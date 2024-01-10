@@ -18,6 +18,7 @@ import { useEffect } from "react";
 import { useApiToken } from "../zustand/useApiToken";
 import { Forgot } from "./Forgot";
 import axiosInstance from "../../api/axiosInstance";
+import { usePaymentStore } from "../zustand/usePaymentStore";
 
 export const Login = ({
   setNewUserLog,
@@ -30,8 +31,9 @@ export const Login = ({
     phone: "",
     password: "",
   });
-  const { allCartItems, clearCartApi } =
-    useCartStore();
+  const { setTotalPrice, setTotalMRPPrice, setTotalItems } = usePaymentStore();
+  const { allCartItems, setAllCartItems, setCartTotal,clearCartApi,setTotalItem,setPrice} = useCartStore();
+  
   const { setUserInfo } = useUserStore();
   const [showSignUp, setShowSignUp] = useState(false);
   const [loginForm, setLoginForm] = useState(true);
@@ -44,7 +46,9 @@ export const Login = ({
   const [visiblePassword, setVisiblePassword] = useState(false);
   let loginRef = useRef(null);
   const { apiToken } = useApiToken();
+  
 
+  
   const handleShow = (e) => {
     e.preventDefault();
     setLoginForm(false);
@@ -104,9 +108,192 @@ export const Login = ({
     clearCartApi();
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const total = () => {
+    let price = 0;
+    allCartItems &&
+      allCartItems.forEach((cartItem) => {
+        if (cartItem.amount) {
+          price += parseFloat(cartItem.discounted_price) * cartItem.amount;
+        }
+      });
+    setPrice(price);
+    setTotalPrice(price);
+    setCartTotal(price);
+  };
 
+  const totalAmount = () => {
+    let totalAmount = 0;
+    allCartItems &&
+      allCartItems.forEach((e) => {
+        if (e.amount) {
+          totalAmount += parseFloat(e.amount);
+        }
+      });
+    setTotalItem(totalAmount);
+    setTotalItems(totalAmount);
+  };
+
+  const getUserCartsEnter = (user_id) => {
+    console.log("getUserCarts>>>>>>>",user_id)
+    console.log("apiToken>>>>>>>",apiToken)
+    let config = {
+      headers: {
+        // Authorization: `Bearer ${jwt}`,
+        Authorization: `Bearer ${apiToken}`,
+      },
+    };
+
+    var bodyFormdata = new FormData();
+    bodyFormdata.append("accesskey", "90336");
+    bodyFormdata.append("get_user_cart", "1");
+    bodyFormdata.append("user_id", user_id);
+    setisLoading(true);
+
+    return axiosInstance
+      .post(
+        "https://grocery.intelliatech.in/api-firebase/cart.php",
+        bodyFormdata,
+        config
+      )
+      .then((res) => {
+        let addQtyAmount = res?.data?.data?.map((data) => ({
+          ...data,
+          amount: +data.qty,
+        }));
+        // setAddItem(addQtyAmount);
+
+        {
+          addQtyAmount && setAllCartItems(addQtyAmount);
+        }
+        console.log("setAllCartItems11111>>>>",addQtyAmount);
+        setisLoading(false);
+        total();
+        totalAmount();
+      })
+      .catch((error) => {
+        console.log(error);
+        setisLoading(false);
+      });
+  };
+
+  
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  
+  //   if (!logins.phone && !logins.password) {
+  //     toast.error("Please enter both phone and password!", {
+  //       position: toast.POSITION.TOP_CENTER,
+  //       autoClose: 500,
+  //     });
+  //   } else if (!logins.phone) {
+  //     toast.error("Please enter a valid phone number!", {
+  //       position: toast.POSITION.TOP_CENTER,
+  //       autoClose: 500,
+  //     });
+  //   } else if (!logins.password) {
+  //     toast.error("Please enter a password!", {
+  //       position: toast.POSITION.TOP_CENTER,
+  //       autoClose: 500,
+  //     });
+  //   } else {
+  //     setisLoading(true);
+  
+  //     const loginItem = new FormData();
+  //     loginItem.append("accesskey", "90336");
+  //     loginItem.append("mobile", "+91" + logins.phone);
+  //     loginItem.append("password", logins.password);
+  //     loginItem.append("fcm_id", "YOUR_FCM_ID");
+  
+  //     let config = {
+  //       headers: {
+  //         Authorization: `Bearer ${apiToken}`,
+  //       },
+  //     };
+  
+  //     try {
+  //       const res = await axiosInstance.post(
+  //         "https://grocery.intelliatech.in/api-firebase/login.php",
+  //         loginItem,
+  //         config
+  //       );
+  
+  //       setisLoading(false);
+  
+  //       if (!res.data.error) {
+
+  //         console.log("User Logged info",res.data);
+  //         setLoginData([...loginData, logins]);
+  //         closeLoginModal();
+  //         navigate("/");
+  //         localStorage.setItem("token", `${apiToken}`);
+  //         setUserInfo(res.data);
+  //         let newUserId = res?.data?.user_id;
+  
+  //         toast.success("Logged in successfully!", {
+  //           position: toast.POSITION.TOP_CENTER,
+  //           autoClose: 500,
+  //         });
+  
+  //         const addMultipleItems = async () => {
+  //           let arr = {};
+  //           allCartItems.forEach((item) => {
+  //             arr[item.product_variant_id] = item.amount;
+  //           });
+  
+  //           let variants = Object.keys(arr).join(",");
+  //           let variantQty = Object.values(arr).join(",");
+  
+  //           if (variantQty.length > 0) {
+  //             var bodyFormdata = new FormData();
+  //             bodyFormdata.append("accesskey", "90336");
+  //             bodyFormdata.append("add_multiple_items", "1");
+  //             bodyFormdata.append("user_id", newUserId);
+  //             bodyFormdata.append("product_variant_id", variants);
+  //             bodyFormdata.append("qty", variantQty);
+  //             setisLoading(true);
+  
+  //             try {
+  //               const response = await axiosInstance.post(
+  //                 "https://grocery.intelliatech.in/api-firebase/cart.php",
+  //                 bodyFormdata,
+  //                 config
+  //               );
+  
+  //               setisLoading(false);
+  //               getUserCarts(newUserId);
+  
+  //               if (cartFuncs) {
+  //                 cartFuncs(newUserId);
+  //               }
+  //               console.log(cartFuncs, "cartt");
+  //             } catch (error) {
+  //               console.log(error);
+  //               setisLoading(false);
+  //             }
+  //           }
+  //         };
+  
+  //         await addMultipleItems();
+  //         await getUserCartsEnter(newUserId);
+  //       } else {
+  //         toast.error("Invalid phone OR password!", {
+  //           position: toast.POSITION.TOP_CENTER,
+  //           autoClose: 500,
+  //         });
+  //       }
+  //     } catch (err) {
+  //       setisLoading(false);
+  //     }
+  //   }
+  
+  //   setLogins({
+  //     phone: "",
+  //     password: "",
+  //   });
+  // };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
     if (!logins.phone && !logins.password) {
       toast.error("Please enter both phone and password!", {
         position: toast.POSITION.TOP_CENTER,
@@ -124,51 +311,53 @@ export const Login = ({
       });
     } else {
       setisLoading(true);
-
+  
       const loginItem = new FormData();
       loginItem.append("accesskey", "90336");
       loginItem.append("mobile", "+91" + logins.phone);
       loginItem.append("password", logins.password);
       loginItem.append("fcm_id", "YOUR_FCM_ID");
-
+  
       let config = {
         headers: {
           Authorization: `Bearer ${apiToken}`,
         },
       };
-
-      axiosInstance
-        .post(
+  
+      try {
+        const res = await axiosInstance.post(
           "https://grocery.intelliatech.in/api-firebase/login.php",
           loginItem,
           config
-        )
-        .then((res) => {
-          setisLoading(false);
+        );
+  
+        setisLoading(false);
+  
+        if (!res.data.error) {
 
-          if (!res.data.error) {
-            setLoginData([...loginData, logins]);
-            closeLoginModal();
-            navigate("/");
-            localStorage.setItem("token", `${apiToken}`);
-            setUserInfo(res.data);
-            let newUserId = res?.data?.user_id;
-
-            toast.success("Logged in successfully!", {
-              position: toast.POSITION.TOP_CENTER,
-              autoClose: 500,
+          console.log("User Logged info",res.data);
+          setLoginData([...loginData, logins]);
+          closeLoginModal();
+          navigate("/");
+          localStorage.setItem("token", `${apiToken}`);
+          setUserInfo(res.data);
+          let newUserId = res?.data?.user_id;
+  
+          toast.success("Logged in successfully!", {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 500,
+          });
+  
+          const addMultipleItems = async () => {
+            let arr = {};
+            allCartItems.forEach((item) => {
+              arr[item.product_variant_id] = item.amount;
             });
-            
-
-            const addMultipleItems = () => {
-              let arr = {};
-              allCartItems.forEach((item) => {
-                arr[item.product_variant_id] = item.amount;
-              });
-
-              let variants = Object.keys(arr).join(",");
-              let variantQty = Object.values(arr).join(",");
-
+  
+            let variants = Object.keys(arr).join(",");
+            let variantQty = Object.values(arr).join(",");
+  
+            if (variantQty.length > 0) {
               var bodyFormdata = new FormData();
               bodyFormdata.append("accesskey", "90336");
               bodyFormdata.append("add_multiple_items", "1");
@@ -176,48 +365,46 @@ export const Login = ({
               bodyFormdata.append("product_variant_id", variants);
               bodyFormdata.append("qty", variantQty);
               setisLoading(true);
-
-              return axiosInstance
-                .post(
+  
+              try {
+                const response = await axiosInstance.post(
                   "https://grocery.intelliatech.in/api-firebase/cart.php",
                   bodyFormdata,
                   config
-                )
-                .then((res) => {
-                  setisLoading(false);
-                  // cartFuncs?.cartFuncs(newUserId)
-                  getUserCarts(newUserId);
-
-                  if (cartFuncs) {
-                    cartFuncs(newUserId);
-                  }
-                  console.log(cartFuncs, "cartt");
-                })
-                .catch((error) => {
-                  console.log(error);
-                  setisLoading(false);
-                });
-            };
-
-            addMultipleItems();
-          } else {
-            toast.error("Invalid phone OR password!", {
-              position: toast.POSITION.TOP_CENTER,
-              autoClose: 500,
-            });
-          }
-        })
-        .catch((err) => {
-          setisLoading(false);
-        });
+                );
+  
+                setisLoading(false);
+                getUserCarts(newUserId);
+  
+                if (cartFuncs) {
+                  cartFuncs(newUserId);
+                }
+                console.log(cartFuncs, "cartt");
+              } catch (error) {
+                console.log(error);
+                setisLoading(false);
+              }
+            }
+          };
+  
+          await addMultipleItems();
+          await getUserCartsEnter(newUserId);
+        } else {
+          toast.error("Invalid phone OR password!", {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 500,
+          });
+        }
+      } catch (err) {
+        setisLoading(false);
+      }
     }
-
+  
     setLogins({
       phone: "",
       password: "",
     });
   };
-
   const openForgotPassword = (e) => {
     e.preventDefault();
     setForgotForm(true);

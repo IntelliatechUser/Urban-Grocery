@@ -6,6 +6,7 @@ export const useApiToken = create(
      (set) => ({
        apiToken: "",
        accessTokenApi: (data) => {
+        
          set(() => ({ apiToken: data }));
        },
      }),

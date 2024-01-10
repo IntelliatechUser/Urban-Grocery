@@ -178,6 +178,7 @@ export const ProductDetails = ({}) => {
   }, []);
 
   const addReview = () => {
+    if(user_id){
     let config = {
       headers: {
         Authorization: `Bearer ${apiToken}`,
@@ -229,9 +230,14 @@ export const ProductDetails = ({}) => {
       });
     }
     setImages("");
+  }
   };
 
   const productReviews = () => {
+   if(user_id) {
+
+    console.log("user added review ", user_id)
+
     let config = {
       headers: {
         Authorization: `Bearer ${apiToken}`,
@@ -258,6 +264,7 @@ export const ProductDetails = ({}) => {
         console.log(error)
         setisLoading(false);
       });
+    }
   };
 
   const imagesHandler = (event) => {

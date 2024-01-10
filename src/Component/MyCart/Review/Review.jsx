@@ -121,7 +121,7 @@ function Review({ price, setReviewPage, setShowModal, setNavbarOpen }) {
                     </div>
 
                     <button
-                      className="flex justify-between mt-5 mb-1 bg-lime p-3 text-white fixed bottom-0 md:w-[353px] md:ml-[-1px] xs:w-[340px] sm:w-[750px] 2xs:w-[260px] sm:ml-[-10px] rounded-lg"
+                      className="flex justify-between mt-5 mb-1 bg-lime p-3 text-white fixed bottom-0 md:w-[353px] md:ml-[-1px]  2xs:w-[99%] sm:ml-[-10px] rounded-lg"
                       onClick={() => {
                         handlePayment();
                       }}

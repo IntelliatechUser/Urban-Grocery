@@ -95,6 +95,7 @@ axiosInstance.interceptors.response.use(
         if (generatedToken) {
           useApiToken.getState().accessTokenApi(generatedToken);
           originalRequest.headers.Authorization = `Bearer ${generatedToken}`;
+          console.log("new generated token>>>>>.....");
           return axiosInstance(originalRequest);
         }
       } catch (refreshError) {

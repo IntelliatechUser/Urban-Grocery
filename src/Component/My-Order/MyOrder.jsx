@@ -75,8 +75,8 @@ export const MyOrder = ({ addItem, setNavbarOpen }) => {
 
         <div className="border-r border-r-light_gray  mt-[-40px]  w-4 h-[110vh]"></div>
 
-        <div className="md:w-full sm:w-[60%] xs:w-[85%] overflow-y-scroll h-[90vh]">
-          <div className="md:w-full p-6 rounded-lg ">
+        <div className="md:w-full sm:w-[60%] xs:w-[85%] overflow-y-auto h-[90vh]">
+          <div className="md:w-full p-6 rounded-lg">
             <h1 className="font-bold">My Orders</h1>
             {allOrderDetails?.length > 0 ? (
               allOrderDetails?.map((item) => {

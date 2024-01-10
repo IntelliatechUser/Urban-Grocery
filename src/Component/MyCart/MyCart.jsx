@@ -35,15 +35,16 @@ function MyCart({
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [setAmount] = useState();
-  const [price, setPrice] = useState(0);
+  // const [price, setPrice] = useState(0);
   const [showForm, setShowForm] = useState(false);
   const [Payment, setPayment] = useState(false);
   const [reviewPage, setReviewPage] = useState(false);
   const [newUserLog, setNewUserLog] = useState(false);
   const [newUserSignUpLog, setNewUserSignUpLog] = useState(false);
-  const [totalItem, setTotalItem] = useState(0);
+  // const [totalItem, setTotalItem] = useState(0);
+  
 
-  const { allCartItems, setAllCartItems, setCartTotal } = useCartStore();
+  const { allCartItems, setAllCartItems, setCartTotal ,clearCartApi,setTotalItem,setPrice,price,totalItem} = useCartStore();
   const {
     userInfo: { user_id },
     resetState,
@@ -52,6 +53,7 @@ function MyCart({
   const { jwt, setJwt } = useApiStore();
   const { apiToken } = useApiToken();
   const { setTotalPrice, setTotalMRPPrice, setTotalItems } = usePaymentStore();
+
   const [deleteProduct, setDeleteProduct] = useState(false);
   let mycartRef = useRef(null);
 
@@ -167,6 +169,16 @@ function MyCart({
       });
   };
 
+  const removeHandlerNotLoggedIn=(item)=>{
+    let newArr = allCartItems.filter((data) => data.id !== item.id);
+    setAllCartItems(newArr);
+    let newPrice = price - item.amount * parseFloat(item.price);
+    setPrice(newPrice);
+    setCartTotal(newPrice);
+    setDeleteProduct(false);
+    
+  }
+
   const hideMOdal = () => {
     setShowModal(false);
     setPayment(false);
@@ -204,6 +216,8 @@ function MyCart({
   });
 
   const getUserCarts = (user_id) => {
+    
+   
     let config = {
       headers: {
         // Authorization: `Bearer ${jwt}`,
@@ -233,6 +247,8 @@ function MyCart({
         {
           addQtyAmount && setAllCartItems(addQtyAmount);
         }
+
+        
         setisLoading(false);
         total();
         totalAmount();
@@ -244,17 +260,21 @@ function MyCart({
   };
 
   useEffect(() => {
-    if (apiToken) getUserCarts(user_id);
+    if (user_id) {
+     
+      getUserCarts(user_id);}
   }, [apiToken, accesskey]);
+  
   return (
     <>
       <button
-        className="relative md:bg-lime sm:bg-lime xs:bg-skyblue  text-white items-center float-right flex gap-1
+        className=" relative md:bg-lime sm:bg-lime xs:bg-skyblue  text-white items-center float-right flex gap-1
         font-bold md:px-2 rounded shadow  "
         type="button"
         onClick={() => {
           setShowModal(true);
-          getUserCarts(user_id);
+         if(user_id){
+          getUserCarts(user_id);}
         }}
       >
         <div
@@ -264,7 +284,7 @@ function MyCart({
             className={
               `${totalItem > 0 ? "visible" : "invisible"}` +
               " " +
-              "hidden md:block  absolute top-1 right-0 px-1 rounded-full bg-red text-xs"
+              " hidden md:block  absolute top-1 right-0 px-1 rounded-full bg-red text-xs"
             }
           >
             {totalItem}
@@ -272,20 +292,20 @@ function MyCart({
 
           <FaShoppingCart className="xs:text-2xl md:bg-lime sm:bg-lime md:text-white sm:text-white xs:text-lime " />
         </div>
-        <div className="md:bg-lime sm:bg-lime xs:bg-white">
+        <div className="border-2 border-RedColour md:bg-lime sm:bg-lime xs:bg-white">
           {price > 0 && allCartItems ? (
             <>
-              <div className="block md:hidden absolute top-1 right-1 px-1 rounded-full bg-red text-xs">
+              <div className="  block md:hidden absolute top-1 right-1 px-1 rounded-full bg-red text-xs">
                 {totalItem}
               </div>
             </>
           ) : (
-            <div className="xs:hidden 2xs:hidden md:block sm:block bg-lime ">
+            <div className="  xs:hidden 2xs:hidden md:block sm:block bg-lime ">
               My Cart
             </div>
           )}
           {price > 0 && allCartItems ? (
-            <div className="md:bg-lime md:text-white hidden md:block text-sm float-left">
+            <div className=" md:bg-lime md:text-white hidden md:block text-sm float-left">
               ₹ {price}
             </div>
           ) : null}
@@ -295,15 +315,15 @@ function MyCart({
       {showModal ? (
         <>
           <div
-            className="float-right absolute top-0 right-0 bg-white"
+            className=" float-right absolute top-0 right-0 bg-white"
             ref={menuRef}
           >
             <div className="relative ">
-              <div className="h-[97vh] min-h-screen md:w-96 sm:w-screen xs:w-screen border-0 rounded-lg shadow-lg relative flex flex-col  bg-white outline-none focus:outline-none">
+              <div className=" h-[97vh] min-h-screen md:w-96 sm:w-screen xs:w-screen border-0 rounded-lg shadow-lg relative flex flex-col  bg-white outline-none focus:outline-none">
                 <div className="bg-white flex items-start justify-between p-3 m-0 md:mt-[-7px] border-b border-light_gray shadow-sm">
                   <div className="mt-3 bg-white">
                     {showForm ? (
-                      <button className="back-button bg-white" onClick={back}>
+                      <button className=" back-button bg-white" onClick={back}>
                         <FaArrowLeft className="bg-white" />
                       </button>
                     ) : null}
@@ -318,10 +338,10 @@ function MyCart({
                     My Cart
                   </p>
                   <button
-                    className="bg-transparent text-black float-right"
+                    className=" bg-transparent text-black float-right"
                     onClick={hideMOdal}
                   >
-                    <span className="text-black opacity-6 h-10 w-9 text-2xl block bg-gray-400 py-0 rounded-full bg-white">
+                    <span className=" text-black opacity-6 h-10 w-9 text-2xl block bg-gray-400 py-0 rounded-full bg-white">
                       <AiOutlineCloseCircle
                         className="text-red text-2xl hover:opacity-50 mt-3"
                         onClick={handleCloseModal}
@@ -402,8 +422,12 @@ function MyCart({
                                             </div>
                                             <div className="bg-white">
                                               <FaTrash
-                                                onClick={() =>
+                                                onClick={() =>{
+                                                  console.log("when user remove from cart",user_id);
+                                                  if(user_id)
                                                   removeItemHandler(item)
+                                                  else 
+                                                  removeHandlerNotLoggedIn(item)}
                                                 }
                                                 className="bg-white hover:bg-RedColour hover:bg-opacity-20 cursor-pointer xs:text-[18px]  md:text-[15px] xs:text-sm sm:text-3xl text-red"
                                               />
@@ -427,7 +451,7 @@ function MyCart({
                                   ) : (
                                     <>
                                       <button
-                                        className="flex justify-between bg-lime p-3 mt-5 ml-[-11px]  border-3 text-white fixed bottom-0  md:w-96 xs:w-[370px] sm:w-[750px] 2xs:w-[260px] rounded-lg"
+                                        className="flex justify-between bg-lime p-3 mt-5 ml-[-11px]  border-3 text-white fixed bottom-0  md:w-96 2xs:w-[100%]   rounded-lg"
                                         onClick={() => {
                                           setNewUserLog(true);
                                         }}
@@ -446,7 +470,7 @@ function MyCart({
                                   )
                                 ) : (
                                   <button
-                                    className="flex justify-between mt-5 md:w-96 bg-lime p-3 text-white fixed bottom-0 md:ml-[-11px] xs:ml-[-10px]  xs:w-[370px] sm:w-[763px] 2xs:w-[260px] rounded-lg"
+                                    className="flex justify-between mt-5 md:w-96 bg-lime p-3 text-white fixed bottom-0 md:ml-[-11px] xs:ml-[-10px]  xs:w-[99%] sm:w-[99%] 2xs:w-[99%] rounded-lg"
                                     onClick={formHandler}
                                   >
                                     <p className="p-2 bg-lime text-xl font-bold rounded-lg">

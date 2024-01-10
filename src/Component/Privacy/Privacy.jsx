@@ -108,14 +108,14 @@ export const Privacy = () => {
 
   return (
     <>
-      <div className="flex flex-col mt-24 md:ml-10  xs:justify-center xs:items-center md:items-start sm:items-start md:flex-row md:justify-evenly sm:justify-evenly sm:flex sm:flex-row ">
-        <div className="xs:w-[85%] md:w-[30%] sm:w-[30%] xs:hidden md:block sm:block h-full">
+      <div className="flex flex mt-24 md:ml-10  xs:justify-center xs:items-center md:items-start sm:items-start md:flex-row md:justify-evenly sm:justify-evenly sm:flex sm:flex-row ">
+      <div className="xs:max-w-[85%] md:max-w-[30%] sm:max-w-[30%] xs:hidden md:block sm:block h-full">
           <Aside />
         </div>
 
         <div className="border-r border-r-light_gray  mt-[-40px]  w-4 h-[110vh]"></div>
 
-        <div className="md:w-full sm:w-[60%] xs:w-[85%] overflow-y-scroll h-[90vh] ml-4">
+        <div className="md:w-full sm:w-[60%] xs:w-[85%] overflow-y-auto h-[90vh] ml-4">
           <div dangerouslySetInnerHTML={{ __html: updatedPrivacy }}>
             {/* {JSON.parse(item.description)} */}
           </div>

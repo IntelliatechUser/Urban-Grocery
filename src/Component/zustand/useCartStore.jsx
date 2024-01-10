@@ -8,6 +8,9 @@ import { useApiStore } from "./useApiStore";
 export const useCartStore = create(
   persist(
     (set) => ({
+
+      totalItem:0,
+      price:0,
       allCartItems: [],
       variant:{0:0},
       config: {
@@ -17,6 +20,12 @@ export const useCartStore = create(
       },
       bearer: `${useUserStore.getState().userInfo.user_id}`,
       cartTotal: 0,
+      setTotalItem: (data)=>{
+        set(()=>({totalItem: data}))
+      },
+      setPrice: (data)=>{
+        set(()=>({price: data}))
+      },
       bodyFormData: () => {
         let bodyFormdata = new FormData();
         bodyFormdata.append("accesskey", "90336");

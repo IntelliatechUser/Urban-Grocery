@@ -133,7 +133,7 @@ function Form({ user_id, setReviewPage, setShowForm }) {
       {deliveryAddress ? (
         <>
           <button
-            className="flex justify-center mt-5 mb-1 bg-lime p-3 text-white fixed bottom-0 right-1 md:w-[378px] xs:w-[370px] sm:w-[762px] 2xs:w-[260px] rounded-lg"
+            className="flex justify-center mt-5 mb-1 bg-lime p-3 text-white fixed bottom-0 right-1 md:w-[378px] 2xs:w-[99%]  rounded-lg"
             onClick={handleReview}
           >
             <div className="flex items-center justify-between w-full   ">
