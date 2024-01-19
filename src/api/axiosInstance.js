@@ -130,18 +130,16 @@ axiosInstance.interceptors.request.use(
 let isRefreshing = false;
 axiosInstance.interceptors.response.use(
   async (response) => {
-    const accessToken = useApiToken.getState().apiToken;
-    if (accessToken) {
-      return response;
-    }
+   
+    
     console.log("response interceptor1", response);
     console.log("response interceptor2", response?.data?.message);
     const originalRequest = response?.config;
     if (response?.data?.message === "Invalid Hash") {
       originalRequest._retry = true;
 
-      // if (!isRefreshing) {
-      //   isRefreshing = true;
+      if (!isRefreshing) {
+        isRefreshing = true;
       try {
         const generateTokenResponse = await axiosInstance.get(
           "https://grocery.intelliatech.in/api-firebase/verify-token.php?generate_token",
@@ -166,8 +164,7 @@ axiosInstance.interceptors.response.use(
         isRefreshing = false;
       }
     }
-    // }
-    else return response;
+     }else return response;
     return Promise.reject(response);
   },
   async (error) => {
