@@ -292,10 +292,10 @@ function MyCart({
 
           <FaShoppingCart className="xs:text-2xl md:bg-lime sm:bg-lime md:text-white sm:text-white xs:text-lime " />
         </div>
-        <div className="border-2 border-RedColour md:bg-lime sm:bg-lime xs:bg-white">
+        <div className=" md:bg-lime sm:bg-lime xs:bg-white">
           {price > 0 && allCartItems ? (
             <>
-              <div className="  block md:hidden absolute top-1 right-1 px-1 rounded-full bg-red text-xs">
+              <div className=" block md:hidden absolute top-1 right-1 px-1 rounded-full bg-red text-xs">
                 {totalItem}
               </div>
             </>

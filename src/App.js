@@ -64,18 +64,19 @@ function App() {
       if (generatedToken) {
         accessTokenApi(generatedToken);
         // const verifyTokenResponse = await axios.post(
-        const verifyTokenResponse = await axiosInstance.post(
-          "https://grocery.intelliatech.in/api-firebase/verify-token.php?verify_token",
-          {
-            headers: {
-              Authorization: `Bearer ${generatedToken}`,
-            },
-          }
-        );
-
-        console.log("Verify Token Response:", verifyTokenResponse.data);
+        // const verifyTokenResponse = await axiosInstance.post(
+        //   "https://grocery.intelliatech.in/api-firebase/verify-token.php?verify_token",
+        //   {
+        //     headers: {
+        //       Authorization: `Bearer ${generatedToken}`,
+        //     },
+        //   }
+        // );
+        // console.log("verify Token Response", verifyTokenResponse.data);
+       
       } else {
         console.log("Token is not valid.");
+       
       }
     };
     fetchToken();

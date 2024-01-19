@@ -34,7 +34,7 @@ export const OrderDetailsPage = () => {
     <>
       <div>
         {orderId &&
-          allOrderDetails.map((item, index) => {
+          JSON.parse(allOrderDetails.slice(allOrderDetails.indexOf("{"))).data?.map((item, index) => {
             if (item.id == orderId)
               return (
                 <div className="flex my-28 justify-around" key={index}>

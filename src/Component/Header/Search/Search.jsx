@@ -217,7 +217,7 @@ const Search = ({ setData, name, data }) => {
   return (
     <>
       <div className="w-full max-w-screen-2xl bg-white md:h-[69px] md:mr-44">
-        <div className="inline-flex justify-center relative text-black-500 bg-white xs:my-4 xs:mx-4 sm:ml-36 md:my-3  xs:mt-20 ">
+        <div className="inline-flex justify-center relative text-black-500 bg-white xs:my-4 xs:mx-4  md:my-3  xs:mt-20 ">
           <svg
             className="xs:w-6 sm:h-12 sm:w-10 xs:h-5 xs:text-white absolute border md:w-6 md:h-6 mt-0.5 ml-3 xs:left-2 xs:top-2.5 self-center bg-white"
             xmlns="http://www.w3.org/2000/svg"

@@ -316,7 +316,7 @@ export const ProductDetails = ({}) => {
     }
   }, [apiToken, id]);
 
-  const filterData = productPageData.filter((data) => {
+  const filterData = productPageData?.filter((data) => {
     return data.id === id;
   });
 

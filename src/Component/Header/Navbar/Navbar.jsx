@@ -407,7 +407,7 @@ export const Navbar = ({
               />
             )}
           </div>
-          <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1 z-0 bg-white">
+          <div className="items-center justify-between hidden w-full md:flex sm:w-[40%] md:order-1 z-0 bg-white">
             {NavbarOpen && <Search setData={setData} setName={setName} />}
           </div>
         </div>

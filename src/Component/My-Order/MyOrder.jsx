@@ -46,7 +46,8 @@ export const MyOrder = ({ addItem, setNavbarOpen }) => {
         config
       )
       .then((res) => {
-        setAllOrderDetails(res?.data?.data);
+        
+        setAllOrderDetails(res?.data);
         setisLoading(false);
       })
       .catch((err) => {
@@ -79,10 +80,10 @@ export const MyOrder = ({ addItem, setNavbarOpen }) => {
           <div className="md:w-full p-6 rounded-lg">
             <h1 className="font-bold">My Orders</h1>
             {allOrderDetails?.length > 0 ? (
-              allOrderDetails?.map((item) => {
+             JSON.parse(allOrderDetails.slice(allOrderDetails.indexOf("{"))).data?.map((item) => {
                 return (
                   <div
-                    className=" border p-3 mt-3 flex flex-wrap  justify-between items-center rounded hover:bg-[#f8f4f4] cursor-pointer overflow-y-auto max-h-[240px]  border-[#e6e3e3] py-3 bg-[#fcfff3]"
+                    className="border p-3 mt-3 flex flex-wrap  justify-between items-center rounded hover:bg-[#f8f4f4] cursor-pointer overflow-y-auto max-h-[240px]  border-[#e6e3e3] py-3 bg-[#fcfff3] relative"
                     onClick={() => handleOrderDetails(item.id)}
                   >
                     <div className="w-[95%] ">
@@ -92,7 +93,7 @@ export const MyOrder = ({ addItem, setNavbarOpen }) => {
                             Order ID : {item.id}
                           </p>
 
-                          <p className=" ml-3 font-bold break-all text-lime">
+                          <p className=" ml-3 font-bold  text-lime">
                             Item Quantity : {item?.items?.length}
                           </p>
                         </div>
@@ -121,11 +122,11 @@ export const MyOrder = ({ addItem, setNavbarOpen }) => {
                           >
                             <p>{item.active_status.toLocaleUpperCase()}</p>
                           </div>
-                          <div className="flex shadow-sm gap-2 mt-2 w-36 text-[12px] mb-4 border border-light_gray p-1 rounded-lg">
+                          <div className="flex shadow-sm gap-2 mt-2 w-36 text-[12px] mb-4 border border-light_gray p-1 rounded-lg items-center">
                             <div className="text-[18px]">
                               <GiScooter />
                             </div>
-                            <div>
+                            <div className="flex justify-center align-center">
                               <p>Door Step Delivery</p>
                             </div>
                           </div>
@@ -145,7 +146,7 @@ export const MyOrder = ({ addItem, setNavbarOpen }) => {
                                   alt=""
                                   className="w-20 h-16 rounded-lg"
                                 />
-                                <p className="font-semi-bold text-[#aaa4a4] truncate ..">
+                                <p className=" w-[350px]  font-semi-bold text-[#aaa4a4] truncate ..">
                                   {data.product_name}
                                 </p>
                               </div>
@@ -160,11 +161,13 @@ export const MyOrder = ({ addItem, setNavbarOpen }) => {
                               </p>
                             ))}
                         </div>
-                      </div>
-                    </div>
-                    <div className=" cursor-pointer mt-10 ">
+                        <div className=" cursor-pointer t-1000">
                       <BsChevronRight />
                     </div>
+                      </div>
+                     
+                    </div>
+                    
                   </div>
                 );
               })
