@@ -145,13 +145,14 @@ export const Signup = ({
                               onChange={handleUserSignUp}
                             />
                             <div className="mt-6 mb-3">
-                              {userRegistraion.name?.length >= 2 ? (
+                              {
+                              userRegistraion.name?.length >= 2 ? (
                                 NameRegex.test(userRegistraion.name) ? (
                                   <p className={`text-sm text-lime`}>null</p>
                                 ) : null
                               ) : (
                                 <p className={`text-sm text-RedColour`}>
-                                  Name must be at least 2 characters.
+                               {   userRegistraion.name?.length >=1 && <div>Name must be at least 2 characters</div>}
                                 </p>
                               )}
                             </div>
@@ -196,9 +197,11 @@ export const Signup = ({
                             )
                           ) : (
                             <p className={`text-sm text-RedColour`}>
-                              Password must be at least 8 characters long.
+                            {  userRegistraion.password?.length >= 1 && <div>Password must be at least 8 characters long</div>}
                             </p>
-                          )}
+                          )
+                          
+                          }
                         </div>
 
                         <div className="">

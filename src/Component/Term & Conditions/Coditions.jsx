@@ -54,7 +54,8 @@ export const Coditions = () => {
   return (
     <>
        <div className="flex flex mt-24 md:ml-10  xs:justify-center xs:items-center md:items-start sm:items-start md:flex-row md:justify-evenly sm:justify-evenly sm:flex sm:flex-row ">
-       <div className="xs:max-w-[85%] md:max-w-[30%] sm:max-w-[30%] xs:hidden md:block sm:block h-full">
+       {/* <div className="xs:max-w-[85%] md:max-w-[30%] sm:max-w-[30%] xs:hidden md:block sm:block h-full"> */}
+       <div className="xs:w-[85%] md:w-[30.5%] sm:w-[30%] xs:hidden md:block sm:block h-full">
           <Aside />
         </div>
 
