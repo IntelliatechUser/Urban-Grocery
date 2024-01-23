@@ -86,10 +86,10 @@ export const Address = () => {
           <Aside />
         </div>
 
-        <div className=" border-r border-r-light_gray  mt-[-40px]  w-4 h-[110vh]"></div>
+        <div className=" border-r border-r-light_gray hidden sm:block mt-[-40px]  w-4 h-[110vh]"></div>
 
-        <div className="md:w-full flex justify-center  border-x-GrayBlinkit sm:w-[60%] xs:w-[85%] overflow-y-auto h-[90vh] ml-4">
-          <div className="md:w-full p-12">
+        <div className="md:w-full flex justify-center  border-x-GrayBlinkit sm:w-[60%] xs:w-[85%] overflow-y-auto overflow-y-auto max-h-[70vh] ml-4">
+          <div className="md:w-full pl-12 pr-12 pb-12">
             <div
               className="flex flex-row border b border-light_gray py-3 px-3 md:w-full sm:w-[450px] xs:w-full "
               onClick={() => setFormOpen(!formOpen)}

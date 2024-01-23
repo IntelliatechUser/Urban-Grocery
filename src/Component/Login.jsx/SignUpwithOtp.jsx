@@ -58,6 +58,7 @@ export const SignUpwithOtp = ({
   };
 
   const getVerifyOtp = (e) => {
+   // alert("it is running")
     let config = {
       headers: {
         Authorization: `Bearer ${apiToken}`,
@@ -82,26 +83,34 @@ export const SignUpwithOtp = ({
           });
           setisLoading(false);
         } else {
+          //alert("phone number1");
           if (phoneNumber.length >= 10) {
+          //  alert("phone number2")
             setExpandForm(true);
-            // genrateReCaptcha();
-            if (!window.recaptchaVerifier) {
-              genrateReCaptcha();
-            }
+            genrateReCaptcha();
+            // if (!window.recaptchaVerifier) {
+            //   genrateReCaptcha();
+            // }
             setisLoading(false);
 
             let appVerifier = window.recaptchaVerifier;
 
             const formatPh = "+91" + phoneNumber;
+           // console.log("auth formatph appVerifier",auth,formatPh,appVerifier)
             signInWithPhoneNumber(auth, formatPh, appVerifier)
               .then((confirmationResult) => {
+               // alert("phone number3")
                 window.confirmationResult = confirmationResult;
                 toast.success("OTP has been sent successfully", {
                   position: toast.POSITION.TOP_CENTER,
                   autoClose: 500,
                 });
               })
-              .catch((error) => {});
+              .catch((error) => {
+
+
+                console.log("Error during signInWithPhoneNumber",error);
+              });
           }
         }
       })
@@ -145,7 +154,7 @@ export const SignUpwithOtp = ({
           setShowSignUp(false);
         })
         .catch((err) => {
-          console.log(err);
+          console.log("Error during OTP verification:",err);
         });
     }
   };

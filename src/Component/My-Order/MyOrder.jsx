@@ -69,15 +69,15 @@ export const MyOrder = ({ addItem, setNavbarOpen }) => {
 
   return (
     <>
-      <div className="flex  mt-24 md:ml-10  xs:justify-center xs:items-center sm:justify-evenly sm:flex sm:items-start sm:flex-row ">
+      <div className="flex  mt-24 md:ml-10  xs:justify-center xs:items-start sm:justify-evenly sm:flex sm:items-start sm:flex-row ">
         <div className="xs:w-[85%] md:w-[30%] sm:w-[30%] xs:hidden md:block sm:block h-full">
           <Aside />
         </div>
 
-        <div className="border-r border-r-light_gray  mt-[-40px]  w-4 h-[110vh]"></div>
+        <div className="border-r border-r-light_gray hidden sm:block mt-[-40px]  w-4 h-[110vh]"></div>
 
-        <div className="md:w-full sm:w-[60%] xs:w-[85%] overflow-y-auto h-[90vh]">
-          <div className="md:w-full p-6 rounded-lg">
+        <div className="text-[.9rem]  md:w-full sm:w-[60%] xs:w-[85%] overflow-y-auto h-[90vh] sm:text-lg">
+          <div className="md:w-full pl-6 pr-6 rounded-lg">
             <h1 className="font-bold">My Orders</h1>
             {allOrderDetails?.length > 0 ? (
              JSON.parse(allOrderDetails.slice(allOrderDetails.indexOf("{"))).data?.map((item) => {

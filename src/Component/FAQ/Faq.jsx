@@ -49,9 +49,10 @@ export const Faq = () => {
           <Aside />
         </div>
 
-        <div className="border-r border-r-light_gray  mt-[-40px]  w-4 h-[110vh]"></div>
+        <div className="border-r border-r-light_gray hidden sm:block mt-[-40px]  w-4 h-[110vh]"></div>
 
-        <div className="md:w-full sm:w-[60%] xs:w-[85%] overflow-y-auto h-[90vh] ml-4">
+        {/* <div className="md:w-full sm:w-[60%] xs:w-[85%] overflow-y-auto h-[90vh] ml-4"> */}
+          <div className="md:w-full sm:w-[60%] xs:w-[85%] overflow-y-auto  ml-4"> 
           <div className="bg-white">
             <p className="md:text-md font-bold  ">
               {faqData}

@@ -97,7 +97,8 @@ function Home({
           />
         </div> */}
         <div className="flex justify-center md:mt-16 items-center mx-auto xs:py-4 ">
-          <div className="container w-full items-center">
+          {/* <div className="container w-full items-center"> */}
+          <div className="w-full ">
             <div
               className={
                 isOpen ? "opacity-75" : "opacity-100" + "  xs:px-3 sm:px-5 "
