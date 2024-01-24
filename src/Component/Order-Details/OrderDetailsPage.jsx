@@ -37,8 +37,8 @@ export const OrderDetailsPage = () => {
           JSON.parse(allOrderDetails.slice(allOrderDetails.indexOf("{"))).data?.map((item, index) => {
             if (item.id == orderId)
               return (
-                <div className="flex my-28 justify-around" key={index}>
-                  <div className="md:w-[40%] sm:w-[40%] xs:w-[80%]  shadow-xl p-3 bg-[#fcfff3]">
+                <div className=" sm:flex xs:p-4 my-28 justify-around" key={index}>
+                  <div className=" md:w-[40%] sm:w-[40%] xs:w-[100%] shadow-xl p-3 bg-[#fcfff3]">
                     <div className="flex gap-8 font-bold text-center items-center ">
                       <p>
                         <FaArrowLeft
@@ -125,7 +125,10 @@ export const OrderDetailsPage = () => {
                     </div>
                   </div>
 
-                  <div className="w-[40%] xs:hidden md:block sm:block overflow-y-hidden relative">
+                  <div className=" xs:w-[100%] sm:w-[40%] md:block sm:block overflow-y-hidden relative">
+                   
+                  {/* <div className="w-[40%] xs:hidden md:block sm:block overflow-y-hidden relative"> */}
+                   
                     <div>
                       <div className="overflow-y-scroll scrollbar-none max-h-[90vh]">
                         <p className="text-blackColour font-bold my-2">
