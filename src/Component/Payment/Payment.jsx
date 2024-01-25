@@ -293,9 +293,9 @@ function Payment({ setNavbarOpen, NavbarOpen }) {
 
   return (
     <>
-      <div className="xs:flex h-[100vh] xs:flex-col xs:my-[60px] md:flex md:flex-row md:justify-between rounded-md border-light_gray md:items-center border md:text-center xs:mx-3 sm:m-20 bg-[#fafafa] px-5">
-        <div className="xs:w-full self-start h-auto min-h-[75vh] sm:w-[620px] md:w-[35%] ">
-          <div className="mt-5  rounded-lg shadow-2xl min-h-[75vh] h-auto">
+      <div className="   xs:mt-[60px] md:flex md:flex-row md:justify-between rounded-md border-light_gray md:items-center border md:text-center xs:mx-3 sm:m-20 bg-[#fafafa] px-5  ">
+        <div className=" sm:w-[100%]  mx-auto sm:mx-auto md:mx-0 xs:w-full self-start   sm:w-[620px] md:w-[35%] ">
+          <div className="mt-5  rounded-lg shadow-2xl ">
             <div className="bg-[#6ba9c5] py-2 rounded-t-lg">
               <h2 className="text-lg py-2 text-white font-bold text-center ">
                 Select Payment Method
@@ -344,11 +344,11 @@ function Payment({ setNavbarOpen, NavbarOpen }) {
           </div>
         </div>
         <div>
-          <div>
+          <div className="">
             {/* <div className="mt-28 border border-light_gray p-3 h-auto w-[350px]"> */}
-            <div className="xs:my-16 md:mt-[20px] border border-light_gray h-auto w-[350px] rounded-lg bg-white hidden md:block md:w-[300px]">
+            <div className=" mx-auto w-full xs:my-16 md:mt-[20px] border border-light_gray h-auto w-[350px] rounded-lg bg-white  md:block md:w-[300px]">
               <div className="w-full py-3 bg-[#64bd59] rounded-t-lg text-white ">
-                <h2 className=" font-bold sm:text-center">Order Summary</h2>
+                <h2 className=" font-bold xs:text-center">Order Summary</h2>
               </div>
               <div className="my-4 p-3">
                 <p className="text-[black] text-left font-bold">
