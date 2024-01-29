@@ -180,7 +180,7 @@ export const Navbar = ({
 
                     <li className="cursor-pointer group">
                       <NavLink to={"/myorder"}>
-                        <p onClick={() => setMobileOpen(false)} className="sm:text-lg md:text-sm mt-4">My Orders</p>
+                        <p onClick={() => setMobileOpen(false)} className="sm:text-lg md:text-sm mt-4  group-hover:text-GreenColour">My Orders</p>
                       </NavLink>
                       <div className="border-b my-2 border-light_gray     group-hover:border-green  group-hover:scale-y-[200%]"></div>
                     </li>
@@ -188,7 +188,7 @@ export const Navbar = ({
 
                     <li className="cursor-pointer group">
                       <NavLink to={"/address"}>
-                        <p onClick={() => setMobileOpen(false)} className=" sm:text-lg md:text-sm mt-4  ">
+                        <p onClick={() => setMobileOpen(false)} className=" sm:text-lg md:text-sm mt-4  group-hover:text-GreenColour ">
                           My Address
                         </p>
                       </NavLink>
@@ -197,7 +197,7 @@ export const Navbar = ({
                     {/* <div className="border-b border-light_gray my-2 "></div> */}
                     <li className="  cursor-pointer group">
                       <NavLink to={"/favpage"}>
-                        <p onClick={() => setMobileOpen(false)} className=" sm:text-lg md:text-sm mt-4">
+                        <p onClick={() => setMobileOpen(false)} className=" sm:text-lg md:text-sm mt-4  group-hover:text-GreenColour">
                           Favourties
                         </p>
                       </NavLink>
@@ -207,7 +207,7 @@ export const Navbar = ({
                     <li className="  cursor-pointer group">
                       <p
                         onClick={()=>{handleProfile(); setMobileOpen(false)} }
-                        className="sm:text-lg md:text-sm mt-4"
+                        className="sm:text-lg md:text-sm mt-4  group-hover:text-GreenColour"
                       >
                         My Profile
                       </p>
@@ -217,16 +217,16 @@ export const Navbar = ({
                     <li className=" cursor-pointer group">
                       <div className="flex justify-between mt-4  ">
                         <NavLink to={"/wallet"}>
-                          <p onClick={() => setMobileOpen(false)} className="sm:text-lg md:text-sm">My Wallet</p>
+                          <p onClick={() => setMobileOpen(false)} className="sm:text-lg md:text-sm  group-hover:text-GreenColour">My Wallet</p>
                         </NavLink>
-                        <p className="sm:text-lg md:text-sm">₹500</p>
+                        <p className="sm:text-lg md:text-sm  group-hover:text-GreenColour">₹500</p>
                       </div>
                       <div className="border-b my-2 border-light_gray     group-hover:border-green  group-hover:scale-y-[200%]"></div>
                     </li>
                     {/* <div className="border-b border-light_gray my-2 "></div> */}
                     <li className="cursor-pointer group">
                       <NavLink to={"/faq"}>
-                        <p onClick={() => setMobileOpen(false)} className=" sm:text-lg md:text-sm mt-4 ">FAQ</p>
+                        <p onClick={() => setMobileOpen(false)} className=" sm:text-lg md:text-sm mt-4  group-hover:text-GreenColour">FAQ</p>
                       </NavLink>
                       <div className="border-b my-2 border-light_gray     group-hover:border-green  group-hover:scale-y-[200%]"></div>
                     </li>
@@ -313,7 +313,7 @@ export const Navbar = ({
                           {mobile}
                         </p>
                         {/* <div className="border-b border-light_gray my-2 group-hover:border-green group-hover:border-b-[2px]"></div> */}
-                        <div className={`border-b my-2 border-light_gray  group-hover:border-green  group-hover:scale-y-[200%]`}>
+                        <div className={`border-b my-2 border-light_gray  group-hover:border-green  group-hover:scale-y-[200%] `}>
   {/* Your content goes here */}</div>
 
                       </li>
@@ -323,7 +323,7 @@ export const Navbar = ({
                         <NavLink to={"/myorder"}>
                           <p
                             onClick={() => setIsOpen(false)}
-                            className="sm:text-lg md:text-sm mt-4"
+                            className="sm:text-lg md:text-sm mt-4  group-hover:text-GreenColour"
                           >
                             My Orders
                           </p>
@@ -337,7 +337,7 @@ export const Navbar = ({
                         <NavLink to={"/address"}>
                           <p
                             onClick={() => setIsOpen(false)}
-                            className=" sm:text-lg md:text-sm mt-4"
+                            className=" sm:text-lg md:text-sm mt-4  group-hover:text-GreenColour"
                           >
                             My Address
                           </p>
@@ -349,7 +349,7 @@ export const Navbar = ({
                         <NavLink to={"/favpage"}>
                           <p
                             onClick={() => setIsOpen(false)}
-                            className=" sm:text-lg md:text-sm mt-4"
+                            className=" sm:text-lg md:text-sm mt-4  group-hover:text-GreenColour"
                           >
                             Favourties
                           </p>
@@ -360,7 +360,7 @@ export const Navbar = ({
                       <li className="  cursor-pointer group">
                         <p
                           onClick={handleProfile}
-                          className="sm:text-lg md:text-sm mt-4"
+                          className="sm:text-lg md:text-sm mt-4  group-hover:text-GreenColour"
                         >
                           My Profile
                         </p>
@@ -368,18 +368,18 @@ export const Navbar = ({
                       </li>
                       {/* <div className="border-b border-light_gray my-2 "></div> */}
                       <li className=" cursor-pointer group">
-                        <div className="flex justify-between mt-4  ">
+                        <div className="flex justify-between mt-4  group-hover:text-GreenColour ">
                           <NavLink to={"/wallet"}>
                             <p
                               onClick={() => setIsOpen(false)}
-                              className="sm:text-lg md:text-sm"
+                              className="sm:text-lg md:text-sm  group-hover:text-GreenColour"
                             >
                               My Wallet
                             </p>
                           </NavLink>
                           <p
                             onClick={() => setIsOpen(false)}
-                            className="sm:text-lg md:text-sm"
+                            className="sm:text-lg md:text-sm  group-hover:text-GreenColour"
                           >
                             ₹500
                           </p>
@@ -391,7 +391,7 @@ export const Navbar = ({
                         <NavLink to={"/faq"}>
                           <p
                             onClick={() => setIsOpen(false)}
-                            className=" sm:text-lg md:text-sm mt-4 "
+                            className=" sm:text-lg md:text-sm mt-4  group-hover:text-GreenColour "
                           >
                             FAQ
                           </p>
@@ -403,7 +403,7 @@ export const Navbar = ({
                       <li className=" cursor-pointer group">
                         <p
                           onClick={handleLogout}
-                          className="sm:text-lg md:text-sm mt-4 cursor-pointer"
+                          className="sm:text-lg md:text-sm mt-4 cursor-pointer  group-hover:text-GreenColour"
                         >
                           Log Out
                         </p>
