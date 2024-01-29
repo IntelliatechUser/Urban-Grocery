@@ -7,6 +7,7 @@ import { useUserStore } from "../../zustand/useUserStore";
 import { Login } from "../../Login.jsx/Login";
 import { MyProfile } from "../../Profile/MyProfile";
 import { useApiToken } from "../../zustand/useApiToken";
+import { useLocation } from "react-router-dom";
 export const Navbar = ({
   setData,
   addItem,
@@ -21,6 +22,7 @@ export const Navbar = ({
   setUser_id,
 }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   
   const [showSearch, setShowSearch] = useState(true);
   let menuRef = useRef(null);
@@ -167,71 +169,79 @@ export const Navbar = ({
                   ref={mobRef}
                 >
                   <ul className="">
-                    <li className="cursor-pointer">
+                    <li className="cursor-pointer group ">
                       <p className="mt-4 sm:text-2xl md:text-lg">My Account</p>
                       <p className="sm:text-2xl md:text-[15px] font-bold">
                         {mobile}
                       </p>
+                      <div className="border-b my-2 border-light_gray     group-hover:border-green  group-hover:scale-y-[200%]"></div>
                     </li>
-                    <div className="border-b border-light_gray my-2 "></div>
+                    {/* <div className="border-b border-light_gray my-2 "></div> */}
 
-                    <li className="cursor-pointer">
+                    <li className="cursor-pointer group">
                       <NavLink to={"/myorder"}>
                         <p onClick={() => setMobileOpen(false)} className="sm:text-lg md:text-sm mt-4">My Orders</p>
                       </NavLink>
+                      <div className="border-b my-2 border-light_gray     group-hover:border-green  group-hover:scale-y-[200%]"></div>
                     </li>
-                    <div className="border-b border-light_gray my-2 "></div>
+                    {/* <div className="border-b border-light_gray my-2 "></div> */}
 
-                    <li className="cursor-pointer">
+                    <li className="cursor-pointer group">
                       <NavLink to={"/address"}>
                         <p onClick={() => setMobileOpen(false)} className=" sm:text-lg md:text-sm mt-4  ">
                           My Address
                         </p>
                       </NavLink>
+                      <div className="border-b my-2 border-light_gray     group-hover:border-green  group-hover:scale-y-[200%]"></div>
                     </li>
-                    <div className="border-b border-light_gray my-2 "></div>
-                    <li className="  cursor-pointer">
+                    {/* <div className="border-b border-light_gray my-2 "></div> */}
+                    <li className="  cursor-pointer group">
                       <NavLink to={"/favpage"}>
                         <p onClick={() => setMobileOpen(false)} className=" sm:text-lg md:text-sm mt-4">
                           Favourties
                         </p>
                       </NavLink>
+                      <div className="border-b my-2 border-light_gray     group-hover:border-green  group-hover:scale-y-[200%]"></div>
                     </li>
-                    <div className="border-b border-light_gray my-2 "></div>
-                    <li className="  cursor-pointer">
+                    {/* <div className="border-b border-light_gray my-2 "></div> */}
+                    <li className="  cursor-pointer group">
                       <p
                         onClick={()=>{handleProfile(); setMobileOpen(false)} }
                         className="sm:text-lg md:text-sm mt-4"
                       >
                         My Profile
                       </p>
+                      <div className="border-b my-2 border-light_gray     group-hover:border-green  group-hover:scale-y-[200%]"></div>
                     </li>
-                    <div className="border-b border-light_gray my-2 "></div>
-                    <li className=" cursor-pointer">
+                    {/* <div className="border-b border-light_gray my-2 "></div> */}
+                    <li className=" cursor-pointer group">
                       <div className="flex justify-between mt-4  ">
                         <NavLink to={"/wallet"}>
                           <p onClick={() => setMobileOpen(false)} className="sm:text-lg md:text-sm">My Wallet</p>
                         </NavLink>
                         <p className="sm:text-lg md:text-sm">₹500</p>
                       </div>
+                      <div className="border-b my-2 border-light_gray     group-hover:border-green  group-hover:scale-y-[200%]"></div>
                     </li>
-                    <div className="border-b border-light_gray my-2 "></div>
-                    <li className="cursor-pointer">
+                    {/* <div className="border-b border-light_gray my-2 "></div> */}
+                    <li className="cursor-pointer group">
                       <NavLink to={"/faq"}>
                         <p onClick={() => setMobileOpen(false)} className=" sm:text-lg md:text-sm mt-4 ">FAQ</p>
                       </NavLink>
+                      <div className="border-b my-2 border-light_gray     group-hover:border-green  group-hover:scale-y-[200%]"></div>
                     </li>
-                    <div className="border-b border-light_gray my-2 "></div>
+                    {/* <div className="border-b border-light_gray my-2 "></div> */}
 
-                    <li className=" cursor-pointer">
+                    <li className=" cursor-pointer group">
                       <p 
                         onClick={()=>{handleLogout(); setMobileOpen(false)} }
                         className="sm:text-lg md:text-sm mt-4 cursor-pointer"
                       >
                         Log Out
                       </p>
+                      <div className="border-b my-2 border-light_gray     group-hover:border-green  group-hover:scale-y-[200%]"></div>
                     </li>
-                    <div className="border-b border-light_gray my-2 "></div>
+                    {/* <div className="border-b border-light_gray my-2 "></div> */}
                   </ul>
                 </div>
               )}
@@ -291,21 +301,25 @@ export const Navbar = ({
 
                 {isOpen && (
                   <div
-                    className="top-0 p-5 pt-0 right-0 mt-2 w-56 shadow-lg rounded-lg bg-[#f5f4f4]  xs:mt-[73px] md:ml-[980px] md:my-[49px] sm:ml-[400px] xs:ml-[100px] z-10 absolute px-4"
+                    className=" top-0 p-5 pt-0 right-0 mt-2 w-56 shadow-lg rounded-lg bg-[#f5f4f4]  xs:mt-[73px] md:ml-[980px] md:my-[49px] sm:ml-[400px] xs:ml-[100px] z-10 absolute px-4"
                     ref={menuRef}
                   >
                     <ul className="">
-                      <li className="cursor-pointer">
-                        <p className="mt-4 sm:text-2xl md:text-lg">
+                      <li className="cursor-pointer group ">
+                        <p className="mt-4 hover:b sm:text-2xl md:text-lg">
                           My Account
                         </p>
                         <p className="sm:text-2xl md:text-[15px] font-bold">
                           {mobile}
                         </p>
-                      </li>
-                      <div className="border-b border-light_gray my-2 "></div>
+                        {/* <div className="border-b border-light_gray my-2 group-hover:border-green group-hover:border-b-[2px]"></div> */}
+                        <div className={`border-b my-2 border-light_gray  group-hover:border-green  group-hover:scale-y-[200%]`}>
+  {/* Your content goes here */}</div>
 
-                      <li className="cursor-pointer">
+                      </li>
+                      
+
+                      <li className="cursor-pointer group">
                         <NavLink to={"/myorder"}>
                           <p
                             onClick={() => setIsOpen(false)}
@@ -314,10 +328,12 @@ export const Navbar = ({
                             My Orders
                           </p>
                         </NavLink>
+                        <div className="border-b my-2 border-light_gray   group-hover:border-green  group-hover:scale-y-[200%]"></div>
+                        {/* <div className={`border-b my-2 border-light_gray   group-hover:border-green  group-hover:scale-y-[200%] ${ location.pathname==="/myorder"? "border-b my-2 border-green scale-y-[200%] group-hover:border-green  group-hover:scale-y-[200%]":"border-b my-2 border-light_gray"}`}></div> */}
                       </li>
-                      <div className="border-b border-light_gray my-2 "></div>
+                      
 
-                      <li className="cursor-pointer">
+                      <li className="cursor-pointer group">
                         <NavLink to={"/address"}>
                           <p
                             onClick={() => setIsOpen(false)}
@@ -326,9 +342,10 @@ export const Navbar = ({
                             My Address
                           </p>
                         </NavLink>
+                        <div className="border-b my-2 border-light_gray   group-hover:border-green  group-hover:scale-y-[200%]"></div>
                       </li>
-                      <div className="border-b border-light_gray my-2 "></div>
-                      <li className="  cursor-pointer">
+                      {/* <div className="border-b border-light_gray my-2 "></div> */}
+                      <li className="  cursor-pointer group">
                         <NavLink to={"/favpage"}>
                           <p
                             onClick={() => setIsOpen(false)}
@@ -337,18 +354,20 @@ export const Navbar = ({
                             Favourties
                           </p>
                         </NavLink>
+                        <div className="border-b my-2 border-light_gray   group-hover:border-green  group-hover:scale-y-[200%]"></div>
                       </li>
-                      <div className="border-b border-light_gray my-2 "></div>
-                      <li className="  cursor-pointer">
+                      {/* <div className="border-b border-light_gray my-2 "></div> */}
+                      <li className="  cursor-pointer group">
                         <p
                           onClick={handleProfile}
                           className="sm:text-lg md:text-sm mt-4"
                         >
                           My Profile
                         </p>
+                        <div className="border-b my-2 border-light_gray   group-hover:border-green  group-hover:scale-y-[200%]"></div>
                       </li>
-                      <div className="border-b border-light_gray my-2 "></div>
-                      <li className=" cursor-pointer">
+                      {/* <div className="border-b border-light_gray my-2 "></div> */}
+                      <li className=" cursor-pointer group">
                         <div className="flex justify-between mt-4  ">
                           <NavLink to={"/wallet"}>
                             <p
@@ -365,9 +384,10 @@ export const Navbar = ({
                             ₹500
                           </p>
                         </div>
+                        <div className="border-b my-2 border-light_gray   group-hover:border-green  group-hover:scale-y-[200%]"></div>
                       </li>
-                      <div className="border-b border-light_gray my-2 "></div>
-                      <li className="cursor-pointer">
+                      {/* <div className="border-b border-light_gray my-2 "></div> */}
+                      <li className="cursor-pointer group">
                         <NavLink to={"/faq"}>
                           <p
                             onClick={() => setIsOpen(false)}
@@ -376,18 +396,20 @@ export const Navbar = ({
                             FAQ
                           </p>
                         </NavLink>
+                        <div className="border-b my-2 border-light_gray   group-hover:border-green  group-hover:scale-y-[200%]"></div>
                       </li>
-                      <div className="border-b border-light_gray my-2 "></div>
+                      {/* <div className="border-b border-light_gray my-2 "></div> */}
 
-                      <li className=" cursor-pointer">
+                      <li className=" cursor-pointer group">
                         <p
                           onClick={handleLogout}
                           className="sm:text-lg md:text-sm mt-4 cursor-pointer"
                         >
                           Log Out
                         </p>
+                        <div className="border-b my-2 border-light_gray   group-hover:border-green  group-hover:scale-y-[200%]"></div>
                       </li>
-                      <div className="border-b border-light_gray my-2 "></div>
+                      {/* <div className="border-b border-light_gray my-2 "></div> */}
                     </ul>
                   </div>
                 )}
