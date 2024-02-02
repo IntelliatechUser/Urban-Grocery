@@ -125,10 +125,10 @@ export const Navbar = ({
           </div>
 
           {NavbarOpen && (
-            <div className="relative hidden xs:block md:hidden sm:hidden">
+            <div className="relative  xs:block md:hidden sm:hidden flex">
               {!(user_id == false) ? (
                 <div
-                  className=" flex justify-center items-center hover:border border border-[white] hover:border-light_gray hover:bg-[#ff9f9]  mr-3 text-center cursor-pointer hover:shadow-sm rounded-br-[50px]  rounded-tr-[50px]  rounded-l-[100px]"
+                  className=" self-end flex justify-center items-center hover:border border pl-0 border-[white] hover:border-light_gray hover:bg-[#ff9f9]  mr-3 text-center cursor-pointer hover:shadow-sm rounded-br-[50px]  rounded-tr-[50px]  rounded-l-[100px]"
                   onClick={() => {
                     setMobileOpen(!mobileOpen);
                   }}
@@ -150,7 +150,7 @@ export const Navbar = ({
                 </div>
               ) : (
                 <div
-                  className="xs:w-20  md:w-24 h-[32px]  rounded-lg md:ml-[-75px] md:px-4 !leading-tight  bg-white"
+                  className="border-2 border-green xs:w-20  md:w-24 h-[32px]  rounded-lg md:ml-[-75px] md:px-4 !leading-tight  bg-white"
                   onClick={() => {
                     setOpenLogin((prev) => !prev);
                   }}
@@ -248,7 +248,7 @@ export const Navbar = ({
             </div>
           )}
 
-          <div className="flex md:order-2 z-10 xs:justify-between bg-white  justify-center gap-1 items-center mr-5">
+          <div className="flex  md:order-2 z-10 xs:justify-between bg-white  justify-center gap-1 items-center mr-5">
             <div className="md:hidden xs:visible rounded-lg bg-skyblue flex items-center justify-center xs:w-10 xs:h-10 ">
               <FaSistrix
                 className=" text-2xl text-lime"
@@ -429,7 +429,7 @@ export const Navbar = ({
               />
             )}
           </div>
-          <div className="items-center justify-between hidden w-full md:flex sm:w-[40%] md:order-1 z-0 bg-white">
+          <div className=" items-center justify-between hidden w-full md:flex sm:w-[40%] md:order-1 z-0 bg-white">
             {NavbarOpen && <Search setData={setData} setName={setName} />}
           </div>
         </div>

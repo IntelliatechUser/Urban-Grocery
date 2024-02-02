@@ -186,9 +186,9 @@ export const SimilarProduct = ({ id }) => {
   return (
     <>
       <div>
-        <p className="text-[22px]  font-semibold">Similar products</p>
+        <p className="text-[22px]  font-semibold ">Similar products</p>
 
-        <div className="">
+        <div className=" ">
           <Carousel responsive={responsive} className="z-0">
             {similarProduct &&
               similarProduct.map((item) => {

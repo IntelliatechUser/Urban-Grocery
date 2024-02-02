@@ -28,7 +28,7 @@ import axios from "./api/axios";
 import { useApiToken } from "./Component/zustand/useApiToken";
 import { ToastContainer } from "react-toastify";
 import axiosInstance from "./api/axiosInstance";
-
+import { ProductsDetails } from "./Component/Category/ProductsDetails/ProductsDetails";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -91,7 +91,7 @@ function App() {
   return (
     <>
       <ToastContainer />
-      <div className="flex flex-col h-screen justify-between">
+      <div className="flex flex-col  justify-between  ">
         <Navbar
           setData={setData}
           addItem={addItem}
@@ -138,7 +138,18 @@ function App() {
               />
             }
           />
-
+<Route
+            path="/subCategories/products-details-page/:subcategory_id"
+            element={
+              <ProductsDetails
+                setAddItem={setAddItem}
+                addItem={addItem}
+                user_id={user_id}
+                setUser_id={setUser_id}
+                setNavbarOpen={setNavbarOpen}
+              />
+            }
+          />
           <Route
             path="/subcategory-details/:category_id"
             element={

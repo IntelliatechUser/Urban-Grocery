@@ -393,7 +393,7 @@ export const ProductDetails = ({}) => {
 
   return (
     <>
-      <div className="2xs:mt-10 xs:mt-10 md:w-[50%] md:p-20 xs:p-8">
+      <div className="2xs:mt-10 xs:mt-10 md:min-w-[45%] md:p-20 xs:p-8 mb-40 min-h-[70vh]">
         {filterData &&
           filterData.map((item) => {
             return (
@@ -417,7 +417,7 @@ export const ProductDetails = ({}) => {
                     </Carousel>
                   </div>
 
-                  <div className="xs:flex-col md:ml-[750px] md:p-6 md:fixed xs:bg-[#f7f7f7] xs:p-2 sm:px-3 md:bg-[#f7f7f7] md:rounded-xl">
+                  <div className="xs:flex-col md:ml-[750px] md:p-6 md:fixed top-20 xs:bg-[#f7f7f7] xs:p-2 sm:px-3 md:bg-[#f7f7f7] md:rounded-xl">
                     <div className="2xs:flex 2xs:mt-4 xs:flex xs:mt-4 sm:mt-8 md:flex md:gap-4 sm:gap-7 xs:gap-6 2xs:gap-3">
                       <div className="2xs:flex xs:flex 2xs:gap-1 xs:gap-1  md:flex md:gap-1 ">
                         {user_id !== 14 &&
@@ -538,7 +538,7 @@ export const ProductDetails = ({}) => {
                   </div>
                 </div>
 
-                <div className="text-left md:ml-20 xs:ml-1 mb-3">
+                <div className="text-left md:ml-20 xs:ml-1 mb-3 md:max-w-[35vw] mx-auto ">
                   <div
                     dangerouslySetInnerHTML={{ __html: item.description }}
                   ></div>
@@ -616,7 +616,7 @@ export const ProductDetails = ({}) => {
                                           }
                                           className={`${
                                             review.images.length > 2
-                                              ? 'last:before:content-["+3"]  cursor-pointer before:w-24 before:h-24 last:opacity-60  last:before:absolute'
+                                              ? 'last:before:content-["+3"]  cursor-pointer before:w-24 before:h-24 last:opacity-60  last:before:absolute '
                                               : ""
                                           } 
  text-3xl text-[#f5f5f5]`}
@@ -633,7 +633,7 @@ export const ProductDetails = ({}) => {
 
                                 {showImageModal &&
                                   reviewIndex === mainindex && (
-                                    <div className="fixed z-50 top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-75 ">
+                                    <div className="fixed z-50 top-0 left-0  w-full h-full flex justify-center items-center bg-black bg-opacity-75 ">
                                       <div
                                         className="bg-white p-3 sm:h-[auto] rounded-lg flex items-center justify-evenly gap-1 relative h-auto mt-3"
                                         ref={imageModalRef}
