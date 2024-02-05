@@ -284,7 +284,7 @@ function MyCart({
             className={
               `${totalItem > 0 ? "block" : "hidden"}` +
               " " +
-              " hidden md:block  absolute top-1 right-0 px-1 rounded-full  text-xs bg-red"
+              " absolute top-1 right-0 px-1 rounded-full  text-xs bg-red"
             }
           >
             {totalItem}

@@ -104,26 +104,26 @@ function Home({
                 isOpen ? "opacity-75" : "opacity-100" + "  xs:px-3 sm:px-5 "
               }
             >
-              <div className="md:w-auto text-center m-auto xs:py-2 sm:h-auto">
+              <div className="md:w-auto text-center m-auto xs:py-2 sm:h-auto ">
                 <CarouselComponent />
               </div>
 
-              <div className="md:flex md:justify-between md:items-center">
-                <div className="md:w-auto md:p-2 md:my-4 ">
+              <div className="md:flex md:justify-between md:items-center ">
+                <div className=" md:p-2 md:my-4 flex-1 ">
                   <img
                     src={allImg["30"]}
                     alt=""
                     // className="rounded-xl xs:h-[145px] md:w-full md:h-auto xs:w-full sm:h-[232px]"
-                    className="rounded-xl xs:h-[145px] md:w-full md:h-[250px] xs:w-full sm:h-[232px]"
+                    className="rounded-xl xs:h-[145px]  md:h-[250px] xs:w-full sm:h-[232px]"
                   />
                 </div>
 
-                <div className="md:w-auto md:p-2 xs:py-2">
+                <div className=" md:p-2 xs:py-2 flex-1">
                   <img
                     src={allImg["32"]}
                     alt=""
                     // className="rounded-xl xs:h-[145px] md:w-full md:h-auto xs:w-full sm:h-[232px]"
-                    className="rounded-xl xs:h-[145px] md:w-full md:h-[250px] xs:w-full sm:h-[232px]"
+                    className="rounded-xl xs:h-[145px]  md:h-[250px] xs:w-full sm:h-[232px]"
                   />
                 </div>
               </div>

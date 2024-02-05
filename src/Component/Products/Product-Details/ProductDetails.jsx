@@ -44,6 +44,7 @@ export const ProductDetails = ({}) => {
   const [isValidImg, setisValidImg] = useState(false);
   const [review, setReview] = useState("");
   const { allFavItems, setAllFavItems } = useFavStore();
+
   const {
     userInfo: { user_id },
   } = useUserStore();
@@ -178,26 +179,75 @@ export const ProductDetails = ({}) => {
   }, []);
 
   const addReview = () => {
-    if(user_id){
-    let config = {
-      headers: {
-        Authorization: `Bearer ${apiToken}`,
-      },
-    };
+    if (user_id) {
+      let config = {
+        headers: {
+          Authorization: `Bearer ${apiToken}`,
+        },
+      };
 
-    if (value >= 1 && review) {
+      if (value >= 1 && review) {
+        var bodyFormData = new FormData();
+        bodyFormData.append("accesskey", "90336");
+        bodyFormData.append("add_products_review", "1");
+        bodyFormData.append("product_id", id);
+        bodyFormData.append("user_id", userInfo.user_id);
+        bodyFormData.append("rate", value);
+        bodyFormData.append("review", review);
+
+        images.forEach((image, index) => {
+          bodyFormData.append(`images[]`, image);
+        });
+
+        setisLoading(true);
+
+        axiosInstance
+          .post(
+            "https://grocery.intelliatech.in/api-firebase/get-all-products.php",
+            bodyFormData,
+            config
+          )
+          .then((res) => {
+            setisLoading(false);
+            setReviewOpen(false);
+            productReviews();
+            res.data.error
+              ? toast.error(`${res.data.message}`, {
+                  position: toast.POSITION.TOP_RIGHT,
+                })
+              : toast.success("Review Added Successfully  !", {
+                  position: toast.POSITION.TOP_RIGHT,
+                });
+            setReview("");
+            setValue(0);
+          })
+          .catch((error) => {
+            console.log(error);
+            setisLoading(false);
+          });
+      } else {
+        toast.error("Please Enter All Details !", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      }
+      setImages("");
+    }
+  };
+
+  const productReviews = () => {
+    if (user_id) {
+      console.log("user added review ", user_id);
+
+      let config = {
+        headers: {
+          Authorization: `Bearer ${apiToken}`,
+        },
+      };
+
       var bodyFormData = new FormData();
       bodyFormData.append("accesskey", "90336");
-      bodyFormData.append("add_products_review", "1");
+      bodyFormData.append("get_product_reviews", "1");
       bodyFormData.append("product_id", id);
-      bodyFormData.append("user_id", userInfo.user_id);
-      bodyFormData.append("rate", value);
-      bodyFormData.append("review", review);
-
-      images.forEach((image, index) => {
-        bodyFormData.append(`images[]`, image);
-      });
-
       setisLoading(true);
 
       axiosInstance
@@ -207,63 +257,13 @@ export const ProductDetails = ({}) => {
           config
         )
         .then((res) => {
+          setReviewList(res.data.product_review);
           setisLoading(false);
-          setReviewOpen(false);
-          productReviews();
-          res.data.error
-            ? toast.error(`${res.data.message}`, {
-                position: toast.POSITION.TOP_RIGHT,
-              })
-            : toast.success("Review Added Successfully  !", {
-                position: toast.POSITION.TOP_RIGHT,
-              });
-          setReview("");
-          setValue(0);
         })
         .catch((error) => {
           console.log(error);
           setisLoading(false);
         });
-    } else {
-      toast.error("Please Enter All Details !", {
-        position: toast.POSITION.TOP_RIGHT,
-      });
-    }
-    setImages("");
-  }
-  };
-
-  const productReviews = () => {
-   if(user_id) {
-
-    console.log("user added review ", user_id)
-
-    let config = {
-      headers: {
-        Authorization: `Bearer ${apiToken}`,
-      },
-    };
-
-    var bodyFormData = new FormData();
-    bodyFormData.append("accesskey", "90336");
-    bodyFormData.append("get_product_reviews", "1");
-    bodyFormData.append("product_id", id);
-    setisLoading(true);
-
-    axiosInstance
-      .post(
-        "https://grocery.intelliatech.in/api-firebase/get-all-products.php",
-        bodyFormData,
-        config
-      )
-      .then((res) => {
-        setReviewList(res.data.product_review);
-        setisLoading(false);
-      })
-      .catch((error) => {
-        console.log(error)
-        setisLoading(false);
-      });
     }
   };
 
@@ -607,7 +607,12 @@ export const ProductDetails = ({}) => {
 
                               <div>
                                 <div className="xs:grid xs:grid-cols-3 md:grid-cols-6 relative sm:grid-cols-6 gap-2">
-                                  {review.images.length > 0 &&
+                                  <CrousalImages
+                                    review={review}
+                                    handleImageClick={handleImageClick}
+                                    mainindex={mainindex}
+                                  />
+                                  {/* {review.images.length > 0 &&
                                     review.images.map((image, index) =>
                                       index < 3 ? (
                                         <div
@@ -616,7 +621,7 @@ export const ProductDetails = ({}) => {
                                           }
                                           className={`${
                                             review.images.length > 2
-                                              ? 'last:before:content-["+3"]  cursor-pointer before:w-24 before:h-24 last:opacity-60  last:before:absolute '
+                                              ? 'last:before:content-["+3"]  cursor-pointer before:w-24 before:h-24 last:opacity-60  last:before:absolute'
                                               : ""
                                           } 
  text-3xl text-[#f5f5f5]`}
@@ -628,10 +633,40 @@ export const ProductDetails = ({}) => {
                                           />
                                         </div>
                                       ) : null
+                                    )} */}
+
+                                  {/* <div className="md:w-100vw absolute z-20 ">
+                                    { (
+                                      <Carousel>
+                                        {review.images.length > 0 &&
+                                          review.images.map((image, index) => (
+                                            <div
+                                              key={index}
+                                              onClick={() =>
+                                                handleImageClick(
+                                                  image,
+                                                  mainindex
+                                                )
+                                              }
+                                              className={` ${
+                                                review.images.length > 2
+                                                  ? "cursor-pointer"
+                                                  : ""
+                                              }`}
+                                            >
+                                              <img
+                                                src={image}
+                                                alt={`Image ${index}`}
+                                                className="w-24 h-24 rounded-lg object-cover"
+                                              />
+                                            </div>
+                                          ))}
+                                      </Carousel>
                                     )}
+                                  </div> */}
                                 </div>
 
-                                {showImageModal &&
+                                {/* {showImageModal &&
                                   reviewIndex === mainindex && (
                                     <div className="fixed z-50 top-0 left-0  w-full h-full flex justify-center items-center bg-black bg-opacity-75 ">
                                       <div
@@ -656,7 +691,7 @@ export const ProductDetails = ({}) => {
                                         </>
                                       </div>
                                     </div>
-                                  )}
+                                  )} */}
                               </div>
                               <p className="mt-3">{review.review}</p>
                             </div>
@@ -815,3 +850,109 @@ export const ProductDetails = ({}) => {
     </>
   );
 };
+
+function CrousalImages({ review, handleImageClick, mainindex }) {
+  const [openUserImages, setOpenUserImages] = useState(false);
+let modalCrousal= useRef();
+  const reviewImages = () => {
+    return (
+      <>
+        {review.images.length > 0 &&
+          review.images.map(
+            (image, index) =>
+              index < 3 && (
+                <div
+                  onClick={() => {
+                    handleImageClick(image, mainindex);
+                    setOpenUserImages(true);
+                  }}
+                  className={`${
+                    review.images.length > 5
+                      ? '  last:before:content-["+3"]  cursor-pointer before:w-24 before:h-24 last:opacity-60  last:before:absolute'
+                      : ""
+                  } text-3xl text-[#f5f5f5]`}
+                >
+                  <img
+                    key={index}
+                    src={image}
+                    className="w-24 h-24 rounded-lg object-cover"
+                    alt={`Image ${index}`}
+                  />
+                </div>
+              )
+          )}
+      </>
+    );
+  };
+  const handleClickLoginOutside = (event) => {
+  
+    if (
+      event.target.classList.contains("carousel-container")   ) {
+      setOpenUserImages(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickLoginOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickLoginOutside);
+    };
+  }, []);
+  return (
+    <>
+      {reviewImages()}
+      {openUserImages && (
+        <div className="fixed z-50 inset-0 bg-black bg-opacity-75 w-[100vw] h-[100vh]  carousel-container" >
+          
+          <div className="relative  w-[100vw] h-[100vh] md:w-[40vw] md:h-[40vh] sm:top-[30%] sm:left-[50%] sm:transform sm:translate-x-[-50%] sm:translate-y-[-50%]      ">
+          <button className="absolute top-2 right-2"
+                  onClick={() => {
+                    setOpenUserImages(false);
+                  }}
+                >
+
+
+
+
+<span className=" text-black h-10 w-9 text-2xl block bg-gray-400 py-0 rounded-full bg-white">
+                      <AiOutlineCloseCircle
+
+
+className="z-[100] w-6 h-6 cursor-pointer absolute sm:w-6 sm:h-6 bg-[#fff]  hover:opacity-100 opacity-80 rounded-full top-[10px] text-[24px] right-0 z-500 sm:z-51 text-red  hover:opacity-100 text-2xl mt-3"
+                        // className="text-red text-2xl hover:opacity-50 mt-3"
+                      
+                      /></span>
+                 {/* <AiOutlineCloseCircle className="z-[100] w-10 h-10 cursor-pointer absolute sm:w-10 sm:h-10 bg-[#fff] bg-opacity-90  hover:opacity-100 opacity-50 rounded-full top-[10px] text-[24px] right-0 z-500 hover:bg-lime sm:z-51" /> */}
+                </button>
+            <Carousel
+              showThumbs={false}
+              onClose={() => {
+                setOpenUserImages(false);
+              }}
+              
+            >
+              {review.images.length > 0 &&
+                review.images.map((image, index) => (
+                  <div 
+                    key={index}
+                    onClick={() => {
+                    
+                      handleImageClick(image, mainindex);
+                    }}
+                    className={`   ${
+                      review.images.length > 2 ? "cursor-pointer" : ""
+                    }`}
+                  >
+                    <img src={image} alt={`Image ${index}`} className=" " />
+                  </div>
+                ))}
+            </Carousel>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
+export default CrousalImages;
