@@ -91,7 +91,7 @@ function App() {
   return (
     <>
       <ToastContainer />
-      <div className="flex flex-col  justify-between  ">
+      <div className="flex flex-col  justify-between   ">
         <Navbar
           setData={setData}
           addItem={addItem}
@@ -238,9 +238,9 @@ function App() {
             }
           />
         </Routes>
-        <div className="bg-[#faffed]  w-full text-center opacity-80 shadow-[inset_0_-2px_10px_rgba(0,0,0,0.6)]">
-          <footer className=" ">
-            <div className=" text-sm  mb-4">
+        <div className="bg-[#faffed]  w-full text-center opacity-80 shadow-[inset_0_-2px_10px_rgba(0,0,0,0.6)] ">
+          <footer className="">
+            <div className=" text-sm  mb-4 ">
               <Footer />
             </div>
           </footer>

@@ -553,8 +553,14 @@ export const SubCategory = ({ setAddItem, addItem, setNavbarOpen }) => {
           config
         )
         .then((res) => {
+          console.log("allproducts>>>>>>>>>>",allproducts)
+          if(res?.data?.data==undefined){
+            setAllProducts([]);
+          }
+          else{
           setAllProducts(res?.data?.data);
           setIsLoading(false);
+          }
         })
         .catch((err) => {
           console.log(err);
@@ -574,15 +580,15 @@ export const SubCategory = ({ setAddItem, addItem, setNavbarOpen }) => {
 
   return (
     <>
-     <div className="min-h-[55vh] mt-20   shadow-sm     border-[#e8e8e8]  md:p-5  bg-[#fcfff3] rounded-md pl-[8%]">
+     <div className={ " mt-20     shadow-sm     border-[#e8e8e8]  md:p-5  bg-[#fcfff3] rounded-md pl-[8%]"  } >
         <div className=" xs:mx-4    ">
           <div className="text-customBlack text-[16px]">
             <h1 className="font-okra font-600">Shop By SubCategory</h1>
           </div>
         </div>
 
-        <div className="category  md:mt-5 ">
-          <div className="flex  flex-wrap xs:gap-8 xs:ml-4  mb-7  ">
+        <div className={" category  md:mt-5 "}>
+          <div className={"flex  flex-wrap xs:gap-8 xs:ml-4  mb-7      "  }>
             {allproducts &&
               allproducts.map((subCategories) => {
                 return (
