@@ -114,16 +114,16 @@ function Home({
                     src={allImg["30"]}
                     alt=""
                     // className="rounded-xl xs:h-[145px] md:w-full md:h-auto xs:w-full sm:h-[232px]"
-                    className="rounded-xl xs:h-[145px]  md:h-[250px] xs:w-full sm:h-[232px]"
+                    className="rounded-xl "
                   />
                 </div>
 
-                <div className=" md:p-2 xs:py-2 flex-1">
+                <div className=" md:p-2 xs:my-4 flex-1 ">
                   <img
                     src={allImg["32"]}
                     alt=""
                     // className="rounded-xl xs:h-[145px] md:w-full md:h-auto xs:w-full sm:h-[232px]"
-                    className="rounded-xl xs:h-[145px]  md:h-[250px] xs:w-full sm:h-[232px]"
+                    className="rounded-xl "
                   />
                 </div>
               </div>
