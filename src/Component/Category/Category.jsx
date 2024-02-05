@@ -43,7 +43,7 @@ export const Category = () => {
 
   return (
     <>
-      <div className="shadow-sm border xs:h-36 md:h-72 sm:h-72 border-[#e8e8e8] xs:my-3 md:p-5 md:mt-7 bg-[#fcfff3] rounded-md">
+      <div className="shadow-sm border  border-[#e8e8e8] xs:my-3 md:p-5 md:mt-7 bg-[#fcfff3] rounded-md  ">
         <div className="xs:my-2 xs:mx-2 mt-20 flex justify-between">
           <div className="text-customBlack text-[16px]">
             <h1 className="font-okra font-600">Shop By Category</h1>
@@ -51,7 +51,7 @@ export const Category = () => {
         </div>
 
         <div className="category xs:mt-3 md:mt-5">
-          <div className="flex justify-between items-center xs:gap-2">
+          <div className="flex sm:justify-between  items-center xs:gap-2  flex-wrap mb-5">
             {allCategories &&
               allCategories.map((item) => {
                 return (
