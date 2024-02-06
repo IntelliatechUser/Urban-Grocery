@@ -884,19 +884,20 @@ let modalCrousal= useRef();
       </>
     );
   };
-  const handleClickLoginOutside = (event) => {
+  const handleClickOutside = (event) => {
   
     if (
-      event.target.classList.contains("carousel-container")   ) {
+      event.target.classList.contains("carousel-container") || event.target.classList.contains("carousel-container-mobile")   ) {
       setOpenUserImages(false);
     }
   };
 
   useEffect(() => {
-    document.addEventListener("mousedown", handleClickLoginOutside);
-
+    document.addEventListener("mousedown", handleClickOutside);
+   
     return () => {
-      document.removeEventListener("mousedown", handleClickLoginOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
+     
     };
   }, []);
   return (
@@ -905,7 +906,7 @@ let modalCrousal= useRef();
       {openUserImages && (
         <div className="fixed z-50 inset-0 bg-black bg-opacity-75 w-[100vw] h-[100vh]  carousel-container" >
           
-          <div className="relative  w-[100vw] h-[100vh] md:w-[40vw] md:h-[40vh] sm:top-[30%] sm:left-[50%] sm:transform sm:translate-x-[-50%] sm:translate-y-[-50%]      ">
+          <div className="relative  w-[100vw] h-[100vh] md:w-[40vw] md:h-[40vh] sm:top-[30%] sm:left-[50%] sm:transform sm:translate-x-[-50%] sm:translate-y-[-50%]  carousel-container-mobile    ">
           <button className="absolute top-2 right-2"
                   onClick={() => {
                     setOpenUserImages(false);
