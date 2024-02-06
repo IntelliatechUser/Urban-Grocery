@@ -91,7 +91,7 @@ function App() {
   return (
     <>
       <ToastContainer />
-      <div className="flex flex-col  justify-between h-[100vh]   ">
+      <div className="flex flex-col  justify-between min-h-[100vh]   ">
         <Navbar
           setData={setData}
           addItem={addItem}
