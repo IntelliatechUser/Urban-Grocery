@@ -244,7 +244,7 @@ export const ProductsDetails = ({ setAddItem, addItem, setNavbarOpen }) => {
     <>
       <div className="min-h-[65vh]  ">
         {/* <div className=" mt-20 xs:grid xs:grid-cols-2 md:grid md:grid-cols-7 sm:grid-cols-3 flex flex-wrap md:ml-5 xs:ml-7 "> */}
-        <div className=" mt-20  flex flex-wrap md:ml-5 xs:ml-7 gap-8 ">
+        <div className=" mt-20  flex flex-wrap md:ml-5 xs:ml-14 gap-8 ">
           {isLoading ? (
             <p className="m-auto">Loading...</p>
           ) : allproducts && allproducts?.length > 0 ? (
