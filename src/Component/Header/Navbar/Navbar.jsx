@@ -150,7 +150,7 @@ export const Navbar = ({
                 </div>
               ) : (
                 <div
-                  className="border-2 border-green xs:w-20  md:w-24 h-[32px]  rounded-lg md:ml-[-75px] md:px-4 !leading-tight  bg-white"
+                  className=" xs:w-20  md:w-24 h-[32px]  rounded-lg md:ml-[-75px] md:px-4 !leading-tight  bg-white"
                   onClick={() => {
                     setOpenLogin((prev) => !prev);
                   }}
