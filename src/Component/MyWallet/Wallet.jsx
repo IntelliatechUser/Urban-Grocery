@@ -18,7 +18,7 @@ export const Wallet = () => {
 
         <div className="border-r border-r-light_gray hidden sm:block mt-[-40px]  w-4 h-[110vh]"></div>
 {/* <div className="md:w-full sm:w-[60%] xs:w-[85%] overflow-y-auto h-[90vh] ml-4"> */}
-        <div className="md:w-full sm:w-[60%]    overflow-y-auto border-2 border-green ">
+        <div className="md:w-full sm:w-[60%]    overflow-y-auto  ">
           
           <div className="xs:text-center xs:justify-center xs:flex xs:flex-col md:text-center md:justify-center md:flex flex-col sm:flex sm:text-center sm:justify-center border border-light_gray shadow-lg xs:w-40 xs:h-20 sm:ml-16 md:w-72 sm:w-[400px] sm:h-[100px] md:h-24 md:ml-[250px] xs:overflow-y-hidden">
             <p className="xs:text-base xs:font-semibold sm:text-3xl md:text-[20px] md:flex md:flex-col">
