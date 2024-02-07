@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useCartStore } from "../zustand/useCartStore";
-import { useUserStore } from "../zustand/useUserStore";
+
 import { useLoaderState } from "../zustand/useLoaderState";
 import { currencyFormatter } from "../../utils/utils";
 import { usePaymentStore } from "../zustand/usePaymentStore";
@@ -11,10 +11,11 @@ import { useApiStore } from "../zustand/useApiStore";
 import { useApiToken } from "../zustand/useApiToken";
 import { toast } from "react-toastify";
 import axiosInstance from "../../api/axiosInstance";
-
+import { useUserStore } from "../zustand/useUserStore";
 // import {  SiRazorpay } from "../react-icons/si";
 
 function Payment({ setNavbarOpen, NavbarOpen }) {
+  
   const { clearCartApi, setAllCartItems, allCartItems, cartTotal } =
     useCartStore();
   const [paymentMethods, setPaymentMethods] = useState([]);
@@ -22,12 +23,13 @@ function Payment({ setNavbarOpen, NavbarOpen }) {
   const { setisLoading } = useLoaderState();
   const { apiToken } = useApiToken();
   const {
-    userInfo: { user_id },
+    userInfo: { balance,user_id},
     userInfo,
     addList,
     deliveryAddress,
   } = useUserStore();
   const navigate = useNavigate();
+  const [wallet ,setWallet]=useState(false);
 
   const { totalPrice, totalMRPPrice } = usePaymentStore();
 
@@ -69,6 +71,7 @@ function Payment({ setNavbarOpen, NavbarOpen }) {
         config
       )
       .then((res) => {
+        
         setPaymentMethods(res?.data?.payment_methods);
         setisLoading(false);
         setNavbarOpen(false);
@@ -106,7 +109,8 @@ function Payment({ setNavbarOpen, NavbarOpen }) {
 
     let createRazorpayId = new FormData();
     createRazorpayId.append("accesskey", "90336");
-    createRazorpayId.append("amount", `${totalPrice * 100}`);
+    // createRazorpayId.append("amount", `${totalPrice * 100}`);
+    createRazorpayId.append("amount", `${totalPrice }`);
     setisLoading(true); 
 
     let config = {
@@ -136,7 +140,7 @@ function Payment({ setNavbarOpen, NavbarOpen }) {
 
     const options = {
       key: "rzp_test_kYyI51d6qc5O2x",
-      amount: amount.toString(),
+      amount: +totalPrice*100,
       currency: currency,
       name: "IntelliaTech.",
       description: "Test Transaction",
@@ -190,7 +194,9 @@ function Payment({ setNavbarOpen, NavbarOpen }) {
       },
     };
 
-    let orderData = new FormData();
+    let orderData = new FormData(); 
+    // orderData.append("wallet_balance", balance);
+ 
     orderData.append("accesskey", "90336");
     orderData.append("place_order", "1");
     orderData.append("user_id", `${user_id}`);
@@ -200,6 +206,7 @@ function Payment({ setNavbarOpen, NavbarOpen }) {
     orderData.append("delivery_charge", "0");
     orderData.append("total", `${cartTotal}`);
     orderData.append("final_total", `${cartTotal}`);
+    // orderData.append("wallet_used",wallet);
     orderData.append(
       "address",
       `${address + " " + area_name + " " + city_name + " " + country}`
@@ -295,19 +302,36 @@ function Payment({ setNavbarOpen, NavbarOpen }) {
     <>
       <div className="   xs:mt-[60px] md:flex md:flex-row md:justify-between rounded-md border-light_gray md:items-center border md:text-center xs:mx-3 sm:m-20 bg-[#fafafa] px-5  ">
         <div className=" sm:w-[100%]  mx-auto sm:mx-auto md:mx-0 xs:w-full self-start    md:w-[35%] ">
-          <div className="mt-5  rounded-lg shadow-2xl ">
+          <div className="mt-5 rounded-lg shadow-2xl ">
+            {/* <div className="bg-[#6ba9c5] text-center py-2 mb-3"> 
+            <h2 className="py-2">Use Wallet</h2>
+            </div>
+          <div className="flex  justify-center px-6 ">
+            <div className="flex w-full border-b bg-[#f2f2f2] cursor-pointer border-light_gray mt-2 px-4 py-3 mb-4">
+            <div className="mr-2">
+              <input type="radio" name="wallet_boolean" onClick={()=>setWallet(prev=>!prev)}/>
+            </div>
+            <div className="ml-2 ">
+            <h2 >Wallet</h2>
+              </div>
+              </div>
+          </div>
+             
+          </div> */}
+          {/* <div className="mt-5  rounded-lg shadow-2xl"> */}
             <div className="bg-[#6ba9c5] py-2 rounded-t-lg">
               <h2 className="text-lg py-2 text-white font-bold text-center ">
                 Select Payment Method
               </h2>
             </div>
+            
             <div className="mb-3 px-6 flex flex-col justify-between mt-3">
               {paymentOptionsArray.map((item) => {
                 return (
                   paymentMethods[`${item.id}`] == 1 && (
                     <div
                       key={item.id}
-                      className="flex w-full border-b bg-[#f2f2f2] cursor-pointer border-light_gray items-center mt-2 px-4 py-3"
+                      className="  flex w-full border-b bg-[#f2f2f2] cursor-pointer border-light_gray items-center mt-2 px-4 py-3"
                       onClick={() => {
                         handlePaymentMethod(item.code);
                       }}

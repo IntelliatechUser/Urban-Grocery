@@ -4,7 +4,8 @@ import { persist, createJSONStorage } from "zustand/middleware";
 export const useUserStore = create(
   persist((set) => ({
     userInfo:  {user_id : '',
-                name: "Login"},
+                name: "Login",
+                balance:0},
     deliveryAddress : '',
     addList: [],
     setAddList: (data) => {

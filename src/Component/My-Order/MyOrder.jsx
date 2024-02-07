@@ -76,7 +76,7 @@ export const MyOrder = ({ addItem, setNavbarOpen }) => {
 
         <div className="border-r border-r-light_gray hidden sm:block mt-[-40px]  w-4 h-[110vh]"></div>
 
-        <div className="text-[.9rem]  md:w-full sm:w-[60%] xs:w-[85%] overflow-y-auto h-[90vh] sm:text-lg">
+        <div className="text-[.9rem]  md:w-full sm:w-[60%] xs:w-[85%] overflow-y-auto h-[90vh] sm:text-lg ">
           <div className="md:w-full pl-6 pr-6 rounded-lg">
             <h1 className="font-bold">My Orders</h1>
             {allOrderDetails?.length > 0 ? (
