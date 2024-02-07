@@ -35,9 +35,10 @@ export const Navbar = ({
 
   const [isValidImg, setisValidImg] = useState(false);
   const {
-    userInfo: { user_id, name, profile, mobile },
+    userInfo: { user_id, name, profile, mobile,balance },
     setUserInfo,
   } = useUserStore();
+  
   const { apiToken, accessTokenApi } = useApiToken();
   const [profileView, setProfileView] = useState(false);
 
@@ -219,7 +220,7 @@ export const Navbar = ({
                         <NavLink to={"/wallet"}>
                           <p onClick={() => setMobileOpen(false)} className="sm:text-lg md:text-sm  group-hover:text-GreenColour">My Wallet</p>
                         </NavLink>
-                        <p className="sm:text-lg md:text-sm  group-hover:text-GreenColour">₹500</p>
+                        <p className="sm:text-lg md:text-sm  group-hover:text-GreenColour">₹ {balance}</p>
                       </div>
                       <div className="border-b my-2 border-light_gray     group-hover:border-green  group-hover:scale-y-[200%]"></div>
                     </li>
@@ -381,7 +382,7 @@ export const Navbar = ({
                             onClick={() => setIsOpen(false)}
                             className="sm:text-lg md:text-sm  group-hover:text-GreenColour"
                           >
-                            ₹500
+                            ₹ {balance}
                           </p>
                         </div>
                         <div className="border-b my-2 border-light_gray   group-hover:border-green  group-hover:scale-y-[200%]"></div>
